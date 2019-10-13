@@ -1,0 +1,6 @@
+pyyaml
+pystache
+xmltodict
+pylama
+pylama-pylint
+wheel
