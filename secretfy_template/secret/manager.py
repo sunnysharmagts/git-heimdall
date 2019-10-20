@@ -3,11 +3,15 @@
 
 """Manager of secrets file format
 
-This module manages the file format of the secrets provided. The secrets can be of any format which includes xml, json, yaml. For each format there is a concret secret implementation which parses the secrets file and returns data in dict format
+This module manages the file format of the secrets provided. The secrets can be
+of any format which includes xml, json, yaml. For each format there is a
+concret secret implementation which parses the secrets file and returns data in
+dict format
 """
 
 
 from secretfy_template.secret import secret
+
 
 class SecretsManager:
     """ Secrets file manager plugin."""
@@ -15,7 +19,9 @@ class SecretsManager:
     def get_secret(self, file):
         """Parses the secrets file and returns a dict of data of secrets file.
 
-        It checks the file format of the provided secrets file and based on that create an instance of secrets file processor which and sends to secrets file to it to be parsed.
+        It checks the file format of the provided secrets file and based on
+        that create an instance of secrets file processor which and sends to
+        secrets file to it to be parsed.
 
         Arguments:
             file (str): absolute path of secrets file.

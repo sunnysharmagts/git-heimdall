@@ -1,5 +1,6 @@
 init:
-    pip install -r requirements.txt
+	pip install -r requirements.txt
 
-test:
-    
+lint:
+	#. ./venv && isort --quiet --diff --skip-glob "*/build/*"
+	. ./venv && pylama

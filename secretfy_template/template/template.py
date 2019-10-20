@@ -3,20 +3,23 @@
 
 """Template plugin to generate final configuration file.
 
-This module defines the :class:`Template` class that read the template and secret file and generates the final configuration file.
+This module defines the :class:`Template` class that read the template and
+secret file and generates the final configuration file.
 """
 
 
 import os
-import xmltodict
 import jinja2
 from secretfy_template.secret import manager
+
 
 class Template:
     """Template configuration generator plugin. """
 
     def __init__(self):
-        """Creates an instance of :class:`Template` plugin. It creates an instance of :class:`SecretsManager` required for parsing multiple format secrets file
+        """Creates an instance of :class:`Template` plugin. It creates an
+        instance of :class:`SecretsManager` required for parsing multiple
+        format secrets file
         """
         self._secret_manager = manager.SecretsManager()
 
@@ -34,7 +37,7 @@ class Template:
         templatePath = os.path.dirname(template)
         fullfilename = os.path.basename(template)
         filename = fullfilename.split(".")[0]
-        configFile = templatePath +"/" +filename+ "."+ extension
+        configFile = templatePath + "/" + filename + "." + extension
         templateFile = open(template, 'r')
         file = open(configFile, 'w')
         d = self._secret_manager.get_secret(secrets)
@@ -45,10 +48,12 @@ class Template:
         return configFile
 
     def exclude_from_git(self, config_file):
-        """Makes sure that the generated configuration file doesn't show in git status.
+        """Makes sure that the generated configuration file doesn't show in git
+        status.
 
         Arugments:
-            config_file (str): absolute path of the genrated configuration file.
+            config_file (str): absolute path of the genrated configuration
+            file.
         """
         if self._is_file_ignored(config_file):
             return
@@ -63,7 +68,8 @@ class Template:
         """Add the configuration file to exclude configuration.
 
         Arugments:
-            config_file (str): absolute path of the genrated configuration file.
+            config_file (str): absolute path of the genrated configuration
+            file.
         """
         gitignoreFile = open(".git/info/exclude", 'r')
         for line in gitignoreFile:

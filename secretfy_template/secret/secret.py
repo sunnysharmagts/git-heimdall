@@ -3,7 +3,8 @@
 
 """Secrets file processor
 
-This module defines the skeleton of reading different file format and their concrete implementation
+This module defines the skeleton of reading different file format and their
+concrete implementation
 """
 
 import xmltodict

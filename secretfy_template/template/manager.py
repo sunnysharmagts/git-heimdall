@@ -3,10 +3,12 @@
 
 """Manager of template process.
 
-This module generates the template process which parses the template and secrets file and generates desired configuration file.
+This module generates the template process which parses the template and
+secrets file and generates desired configuration file.
 """
 
 from secretfy_template.template import template
+
 
 class TemplateManager:
 

@@ -6,6 +6,7 @@ import yaml
 
 _log = logging.getLogger(__name__)
 
+
 def parse_cli(args=None):
     """Parse command line arguments.
 
@@ -16,6 +17,7 @@ def parse_cli(args=None):
         argparse.Namespace: Parsed command line arguments.
 
     """
+
 
 def load_config():
     """Load configuration from specified configuration paths.

@@ -1,5 +1,5 @@
 """Main script for the package."""
 
-from secretfy-template import manager
+from secretfy_template import manager
 
 manager.main()
