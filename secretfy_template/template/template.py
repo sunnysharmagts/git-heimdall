@@ -55,11 +55,10 @@ class Template:
             config_file (str): absolute path of the genrated configuration
             file.
         """
+        dir_path = os.getcwd()
+        config_file = config_file.replace(dir_path, "")
         if self._is_file_ignored(config_file):
             return
-        dir_path = os.getcwd()
-        print(dir_path)
-        config_file = config_file.replace(dir_path, "")
         gitignoreFile = open(".git/info/exclude", 'a+')
         gitignoreFile.write("{}\n".format(config_file))
         gitignoreFile.close()
@@ -73,8 +72,7 @@ class Template:
         """
         gitignoreFile = open(".git/info/exclude", 'r')
         for line in gitignoreFile:
-            if config_file == line:
-                print("This file is already added to .gitignore")
+            if config_file.strip() == line.strip():
                 gitignoreFile.close()
                 return True
         gitignoreFile.close()

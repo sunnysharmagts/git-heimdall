@@ -1,5 +1,5 @@
-"""Secretfy-template - Secrets template creator framework."""
+"""Secretfy-template - Secrets config creator framework."""
 
 
 __version__ = '0.0.1.dev'
-__author__ = 'Secretfy-template-creator Authors and Contributors'
+__author__ = 'Secretfy-config-creator Authors and Contributors'

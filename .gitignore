@@ -1,5 +1,5 @@
 # Ignore automatically generated files.
-venv
+vsecretfy
 .coverage
 .coverage.*
 htmlcov/
@@ -16,3 +16,7 @@ dist/
 
 # Ignore Python cache files.
 *.pyc
+*.egg-info
+
+# Ignore local secretfy config files.
+secretfy_config.yaml

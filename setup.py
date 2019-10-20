@@ -6,7 +6,7 @@ import secretfy_template
 _requires = open('requirements-dev.txt').read().splitlines()
 _version = secretfy_template.__version__
 
-setuptools.setup(name='secretfy-template-creator',
+setuptools.setup(name='secretfy-config-creator',
                  version=_version,
                  description='Tool to create configuration file from secret\
                     templates',
