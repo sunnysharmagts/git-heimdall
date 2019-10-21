@@ -8,7 +8,9 @@ secrets file and generates desired configuration file.
 """
 
 from secretfy_template.template import template
-
+import shutil
+import os.path
+from os import path
 
 class TemplateManager:
 
@@ -19,5 +21,16 @@ class TemplateManager:
         template = kwargs.get('template')
         secret = kwargs.get('secret')
         extension = kwargs.get('extension')
-        generatedFile = self._template.generate(secret, template, extension)
-        self._template.exclude_from_git(generatedFile)
+        config_file = self._template.generate(secret, template, extension)
+        self._template.exclude_from_git(config_file)
+
+    def move_mock_files(self):
+        """Move the mock template, secret and config files to /tmp/secretfy-config-creator
+        """
+        dir = '/tmp/secretfy-config-creator'
+        dir_exists = path.exists(dir)
+        if not dir_exists:
+            os.mkdir(dir)
+        shutil.copyfile('secretfy_template/res/example.yaml', dir+'/example.yaml')
+        shutil.copyfile('secretfy_template/res/secrets.yaml', dir+'/secrets.yaml')
+        shutil.copyfile('secretfy_template/res/example.yaml.mustache', dir+'/example.yaml.mustache')
