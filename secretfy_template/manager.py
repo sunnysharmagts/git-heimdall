@@ -14,4 +14,3 @@ def main():
     args = util.parse_cli()
     if args.mock:
         template_manager.move_mock_files()
-main()

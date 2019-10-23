@@ -20,3 +20,6 @@ dist/
 
 # Ignore local secretfy config files.
 secretfy_config.yaml
+
+#Ignore .html files
+*.html

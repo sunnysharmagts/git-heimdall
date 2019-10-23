@@ -34,3 +34,4 @@ class TemplateManager:
         shutil.copyfile('secretfy_template/res/example.yaml', dir+'/example.yaml')
         shutil.copyfile('secretfy_template/res/secrets.yaml', dir+'/secrets.yaml')
         shutil.copyfile('secretfy_template/res/example.yaml.mustache', dir+'/example.yaml.mustache')
+        shutil.copyfile('secretfy_config.yaml', dir+'/baseconfig.yaml')

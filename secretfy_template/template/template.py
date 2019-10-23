@@ -16,6 +16,8 @@ from secretfy_template.secret import manager
 class Template:
     """Template configuration generator plugin. """
 
+    _template_path = None
+
     def __init__(self):
         """Creates an instance of :class:`Template` plugin. It creates an
         instance of :class:`SecretsManager` required for parsing multiple
@@ -34,18 +36,18 @@ class Template:
         Returns:
             str: absolute path of the generated configuration file.
         """
-        templatePath = os.path.dirname(template)
-        fullfilename = os.path.basename(template)
-        filename = fullfilename.split(".")[0]
-        configFile = templatePath + "/" + filename + "." + extension
-        templateFile = open(template, 'r')
-        file = open(configFile, 'w')
+        _template_path = os.path.dirname(template)
+        full_file_name = os.path.basename(template)
+        filename = full_file_name.split(".")[0]
+        config_file = _template_path + "/" + filename + "." + extension
+        template_file = open(template, 'r')
+        file = open(config_file, 'w')
         d = self._secret_manager.get_secret(secrets)
-        src = jinja2.Template(templateFile.read())
+        src = jinja2.Template(template_file.read())
         result = src.render(**d)
         file.write(result)
         file.close()
-        return configFile
+        return config_file
 
     def exclude_from_git(self, config_file):
         """Makes sure that the generated configuration file doesn't show in git
