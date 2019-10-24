@@ -10,6 +10,7 @@ secret file and generates the final configuration file.
 
 import os
 import jinja2
+import git
 from secretfy_template.secret import manager
 
 
@@ -57,11 +58,11 @@ class Template:
             config_file (str): absolute path of the genrated configuration
             file.
         """
-        dir_path = os.getcwd()
-        config_file = config_file.replace(dir_path, "")
+        git_root_dir = self._get_git_repo_path(config_file)
+        config_file = config_file.replace(git_root_dir, "")
         if self._is_file_ignored(config_file):
             return
-        gitignoreFile = open(".git/info/exclude", 'a+')
+        gitignoreFile = open('%s/.git/info/exclude'%(git_root_dir), 'a+')
         gitignoreFile.write("{}\n".format(config_file))
         gitignoreFile.close()
 
@@ -79,3 +80,10 @@ class Template:
                 return True
         gitignoreFile.close()
         return False
+
+    def _get_git_repo_path(self, file_path):
+        """ Get git repo root dir path. """
+
+        git_repo = git.Repo(file_path, search_parent_directories=True)
+        git_root = git_repo.git.rev_parse("--show-toplevel")
+        return git_root
