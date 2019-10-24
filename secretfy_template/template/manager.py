@@ -31,7 +31,17 @@ class TemplateManager:
         dir_exists = path.exists(dir)
         if not dir_exists:
             os.mkdir(dir)
-        shutil.copyfile('secretfy_template/res/example.yaml', dir+'/example.yaml')
-        shutil.copyfile('secretfy_template/res/secrets.yaml', dir+'/secrets.yaml')
-        shutil.copyfile('secretfy_template/res/example.yaml.mustache', dir+'/example.yaml.mustache')
-        shutil.copyfile('secretfy_config.yaml', dir+'/baseconfig.yaml')
+        self.move_files(dir, "yaml")
+        self.move_files(dir, "json")
+        self.move_files(dir, "xml")
+        shutil.copyfile('baseconfig.yaml', dir+'/baseconfig.yaml')
+        shutil.copyfile('config.yaml', dir+'/config.yaml')
+
+    def move_files(self, root, format):
+        dir = root + "/" + format
+        dir_exists = path.exists(dir)
+        if not dir_exists:
+            os.mkdir(dir)
+        shutil.copyfile('secretfy_template/res/example.%s'%(format), dir+'/example.%s' %(format))
+        shutil.copyfile('secretfy_template/res/secrets.%s'%(format), dir+'/secrets.%s'%(format))
+        shutil.copyfile('secretfy_template/res/example.%s.mustache'%(format), dir+'/example.%s.mustache'%(format))

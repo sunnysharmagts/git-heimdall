@@ -10,7 +10,9 @@ def main():
     # path and desired configuration file extension.
 
     template_manager = manager.TemplateManager()
-    template_manager.generate(**util.load_config())
     args = util.parse_cli()
+    config_list = util.load_config(args.config)
+    for config in config_list:
+        template_manager.generate(**config)
     if args.mock:
         template_manager.move_mock_files()

@@ -19,7 +19,8 @@ dist/
 *.egg-info
 
 # Ignore local secretfy config files.
-secretfy_config.yaml
+baseconfig.yaml
+config.yaml
 
 #Ignore .html files
 *.html

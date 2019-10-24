@@ -19,9 +19,15 @@ def parse_cli(args=None):
         argparse.Namespace: Parsed command line arguments.
 
     """
+
+    default_config_paths = [
+        '~/.baseconfig.yaml',
+        'baseconfig.yaml',
+        'config.yaml',
+    ]
     parser = argparse.ArgumentParser(prog='secretfy')
 
-    parser.add_argument('-c', '--config', nargs = '*', help='generates config file with provided configuration params')
+    parser.add_argument('-c', '--config', nargs = '*', default=default_config_paths, help='generates config file with provided configuration params')
 
     parser.add_argument('-m', '--mock', action='store_true', help='generate mock config file with mock configuration param at /tmp/secretfy-config-creator')
 
@@ -31,7 +37,7 @@ def parse_cli(args=None):
     return args
 
 
-def load_config():
+def load_config(config_paths):
     """Load configuration from specified configuration paths.
 
     Arguments:
@@ -41,12 +47,8 @@ def load_config():
         dict: A dictionary of configuration key-value pairs.
 
     """
-    default_config_paths = [
-        '~/.secretfy_config.yaml',
-        'secretfy_config.yaml',
-    ]
     new_config = None
-    for config_path in default_config_paths:
+    for config_path in config_paths:
         config_path = os.path.expanduser(config_path)
         _log.info('Looking for %s', config_path)
 
@@ -57,6 +59,6 @@ def load_config():
         with open(config_path) as f:
             new_config = yaml.safe_load(f)
             new_config = new_config['secretfy_template']
-            break
-
+    if not isinstance(new_config, list):
+        new_config = [new_config]
     return new_config
