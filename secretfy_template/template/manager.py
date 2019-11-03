@@ -24,6 +24,9 @@ class TemplateManager:
         config_file = self._template.generate(secret, template, extension)
         self._template.exclude_from_git(config_file)
 
+    def ignore_secretfy_config_file(self, config_file):
+        self._template.ignore_secretfy_config_file(config_file)    
+
     def move_mock_files(self):
         """Move the mock template, secret and config files to /tmp/secretfy-config-creator
         """
