@@ -17,7 +17,6 @@ from secretfy_template.secret import manager
 class Template:
     """Template configuration generator plugin. """
 
-    _template_path = None
 
     def __init__(self):
         """Creates an instance of :class:`Template` plugin. It creates an
@@ -37,10 +36,10 @@ class Template:
         Returns:
             str: absolute path of the generated configuration file.
         """
-        _template_path = os.path.dirname(template)
+        template_path = os.path.dirname(template)
         full_file_name = os.path.basename(template)
         filename = full_file_name.split(".")[0]
-        config_file = _template_path + "/" + filename + "." + extension
+        config_file = template_path + "/" + filename + "." + extension
         template_file = open(template, 'r')
         file = open(config_file, 'w')
         d = self._secret_manager.get_secret(secrets)
@@ -62,9 +61,9 @@ class Template:
         config_file = config_file.replace(git_root_dir, "")
         if self._is_file_ignored(config_file):
             return
-        gitignoreFile = open('%s/.git/info/exclude'%(git_root_dir), 'a+')
-        gitignoreFile.write("{}\n".format(config_file))
-        gitignoreFile.close()
+        git_ignore_file = open('%s/.git/info/exclude'%(git_root_dir), 'a+')
+        git_ignore_file.write("{}\n".format(config_file))
+        git_ignore_file.close()
 
     def _is_file_ignored(self, config_file):
         """Add the configuration file to exclude configuration.
@@ -73,12 +72,12 @@ class Template:
             config_file (str): absolute path of the genrated configuration
             file.
         """
-        gitignoreFile = open(".git/info/exclude", 'r')
-        for line in gitignoreFile:
+        git_ignore_file = open(".git/info/exclude", 'r')
+        for line in git_ignore_file:
             if config_file.strip() == line.strip():
-                gitignoreFile.close()
+                git_ignore_file.close()
                 return True
-        gitignoreFile.close()
+        git_ignore_file.close()
         return False
 
     def _get_git_repo_path(self, file_path):
