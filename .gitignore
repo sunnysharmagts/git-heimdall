@@ -25,4 +25,4 @@ config.yaml
 #Ignore .html files
 *.html
 
-tests/test_repo_path.py
+secretfy_template/test/test_repo_path.py
