@@ -53,7 +53,7 @@ class Template:
         """Makes sure that the generated configuration file doesn't show in git
         status.
 
-        Arugments:
+        Arguments:
             config_file (str): absolute path of the genrated configuration
             file.
         """
@@ -64,6 +64,23 @@ class Template:
         git_ignore_file = open('%s/.git/info/exclude'%(git_root_dir), 'a+')
         git_ignore_file.write("{}\n".format(config_file))
         git_ignore_file.close()
+
+    def ignore_secretfy_config_file(self, config_file):
+        """This method ignores the config file which contains template, secrets and extension metadata.
+
+        Arguments:
+            config (str): absolute path of the secretfy config file of yaml format
+        """
+        for config in config_file:
+            git_root_dir = self._get_git_repo_path(config)
+            print("Git file: ",git_root_dir)
+            config = config.replace(git_root_dir, "")
+            print("Config: ", config)
+            if not config.startswith(config) or self._is_file_ignored(config):
+                return
+            git_ignore_file = open('%s/.git/info/exclude'%(git_root_dir), 'a+')
+            git_ignore_file.write("{}\n".format(config))
+            git_ignore_file.close()
 
     def _is_file_ignored(self, config_file, project_git_dir):
         """Add the configuration file to exclude configuration.

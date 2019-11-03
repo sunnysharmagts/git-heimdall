@@ -14,5 +14,6 @@ def main():
     config_list = util.load_config(args.config)
     for config in config_list:
         template_manager.generate(**config)
+        template_manager.ignore_secretfy_config_file(args.config)
     if args.mock:
         template_manager.move_mock_files()
