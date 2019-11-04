@@ -9,6 +9,7 @@ secret file and generates the final configuration file.
 
 
 import os
+import os.path
 import jinja2
 import git
 from secretfy_template.secret import manager
@@ -24,6 +25,7 @@ class Template:
         format secrets file
         """
         self._secret_manager = manager.SecretsManager()
+        self._git_root_dir = None
 
     def generate(self, secrets, template, extension):
         """Generates configuration file from given template and secrets.
@@ -60,11 +62,11 @@ class Template:
             config_file (str): absolute path of the genrated configuration
             file.
         """
-        git_root_dir = self._get_git_repo_path(config_file)
-        config_file = config_file.replace(git_root_dir, "")
-        if self._is_file_ignored(config_file, git_root_dir):
+        self._git_root_dir = self._get_git_repo_path(config_file)
+        config_file = config_file.replace(self._git_root_dir, "")
+        if self._is_file_ignored(config_file, self._git_root_dir):
             return
-        git_ignore_file = open('%s/.git/info/exclude'%(git_root_dir), 'a+')
+        git_ignore_file = open('%s/.git/info/exclude'%(self._git_root_dir), 'a+')
         git_ignore_file.write("{}\n".format(config_file))
         git_ignore_file.close()
 
@@ -75,15 +77,18 @@ class Template:
             config (str): absolute path of the secretfy config file of yaml format
         """
         for config in config_file:
-            git_root_dir = self._get_git_repo_path(config)
-            print("Git file: ",git_root_dir)
-            config = config.replace(git_root_dir, "")
-            print("Config: ", config)
-            if not config.startswith(config) or self._is_file_ignored(config):
-                return
-            git_ignore_file = open('%s/.git/info/exclude'%(git_root_dir), 'a+')
-            git_ignore_file.write("{}\n".format(config))
-            git_ignore_file.close()
+            if not os.path.exists(config):
+                continue
+            file_name = None
+            config = config.rsplit('/', 1)
+            config = config[len(config)-1]
+            for dirpath, dirnames, filenames in os.walk(self._git_root_dir):
+                for filename in [f for f in filenames if f.endswith(config)]:
+                    file_name = os.path.join(dirpath, filename)
+                    line = open(file_name, 'r').readline()
+                    if line == 'secretfy_template':
+                        break
+            self.exclude_from_git(file_name)
 
     def _is_file_ignored(self, config_file, project_git_dir):
         """Add the configuration file to exclude configuration.
