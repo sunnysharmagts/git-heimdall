@@ -3,4 +3,4 @@ init:
 
 lint:
 	#. ./venv && isort --quiet --diff --skip-glob "*/build/*"
-	. ./venv && pylama
+	. ./vsecretfy/bin/activate && pylama secretfy_template
