@@ -59,20 +59,20 @@ class Template:
         """
         git_root_dir = self._get_git_repo_path(config_file)
         config_file = config_file.replace(git_root_dir, "")
-        if self._is_file_ignored(config_file):
+        if self._is_file_ignored(config_file, git_root_dir):
             return
         git_ignore_file = open('%s/.git/info/exclude'%(git_root_dir), 'a+')
         git_ignore_file.write("{}\n".format(config_file))
         git_ignore_file.close()
 
-    def _is_file_ignored(self, config_file):
+    def _is_file_ignored(self, config_file, project_git_dir):
         """Add the configuration file to exclude configuration.
 
         Arugments:
             config_file (str): absolute path of the genrated configuration
             file.
         """
-        git_ignore_file = open(".git/info/exclude", 'r')
+        git_ignore_file = open('%s/.git/info/exclude'%(project_git_dir), 'r')
         for line in git_ignore_file:
             if config_file.strip() == line.strip():
                 git_ignore_file.close()
