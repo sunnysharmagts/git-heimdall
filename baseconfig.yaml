@@ -1,0 +1,4 @@
+secretfy_template:
+    secret: secretfy_template/res/secrets.yaml
+    template: secretfy_template/res/example.yaml.mustache
+    extension: yaml
