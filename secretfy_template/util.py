@@ -4,10 +4,10 @@ import logging
 import os
 import yaml
 import argparse
-import secretfy_template
 from secretfy_template import config
 
 _log = logging.getLogger(__name__)
+
 
 def parse_cli(args=None):
     """Parse command line arguments.
@@ -26,11 +26,22 @@ def parse_cli(args=None):
     ]
     parser = argparse.ArgumentParser(prog='secretfy')
 
-    parser.add_argument('-c', '--config', nargs = '*', default=default_config_paths, help='generates config file with provided configuration params')
+    parser.add_argument(
+        '-c',
+        '--config',
+        nargs='*',
+        default=default_config_paths,
+        help='generates config file with provided configuration params')
 
-    parser.add_argument('-m', '--mock', action='store_true', help='generate mock config file with mock configuration param at /tmp/secretfy-config-creator')
+    parser.add_argument(
+        '-m',
+        '--mock',
+        action='store_true',
+        help='generate mock config file with mock configuration \
+            param at /tmp/secretfy-config-creator')
 
-    # parser.add_argument('-v', '--version', version='%(prog)s'+secretfy_template.__version__)
+    # parser.add_argument('-v', '--version',
+    # version='%(prog)s'+secretfy_template.__version__)
 
     args = parser.parse_args(args)
     return args

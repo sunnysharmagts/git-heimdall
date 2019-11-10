@@ -13,6 +13,7 @@ import shutil
 import os.path
 from os import path
 
+
 class TemplateManager:
 
     def __init__(self):
@@ -31,7 +32,8 @@ class TemplateManager:
         self._template.ignore_secretfy_config_file(config_file)
 
     def move_mock_files(self):
-        """Move the mock template, secret and config files to /tmp/secretfy-config-creator
+        """Move the mock template, secret and config files to
+        /tmp/secretfy-config-creator
         """
         dir = '/tmp/secretfy-config-creator'
         dir_exists = path.exists(dir)
@@ -51,6 +53,12 @@ class TemplateManager:
         if not dir_exists:
             os.mkdir(dir)
         absolute_path = config.get_config_path()
-        shutil.copyfile('%s/res/example.%s'%(absolute_path, format), dir+'/example.%s' %(format))
-        shutil.copyfile('%s/res/secrets.%s'%(absolute_path, format), dir+'/secrets.%s'%(format))
-        shutil.copyfile('%s/res/example.%s.mustache'%(absolute_path, format), dir+'/example.%s.mustache'%(format))
+        shutil.copyfile(
+            '%s/res/example.%s' % (absolute_path, format),
+            dir + '/example.%s' % (format))
+        shutil.copyfile(
+            '%s/res/secrets.%s' % (absolute_path, format),
+            dir + '/secrets.%s' % (format))
+        shutil.copyfile(
+            '%s/res/example.%s.mustache' % (absolute_path, format),
+            dir + '/example.%s.mustache' % (format))

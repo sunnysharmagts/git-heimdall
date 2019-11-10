@@ -3,6 +3,7 @@
 from secretfy_template import util
 from secretfy_template.template import manager
 
+
 def main():
     """Runs the tool to parse the config. """
     # Read the provided config file which contains the template, secrets file

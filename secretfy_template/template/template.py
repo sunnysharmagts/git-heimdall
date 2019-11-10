@@ -20,7 +20,6 @@ _log = logging.getLogger(__name__)
 class Template:
     """Template configuration generator plugin. """
 
-
     def __init__(self):
         """Creates an instance of :class:`Template` plugin. It creates an
         instance of :class:`SecretsManager` required for parsing multiple
@@ -52,7 +51,8 @@ class Template:
         file.write(result)
         file.close()
         # The secrets file shouldn't be seen in `git status` too.
-        # TODO: Check whether the secrets file is inside the git repository or not.
+        # TODO: Check whether the secrets file is inside the git repository or
+        # not.
         self.exclude_from_git(secrets)
         return config_file
 
@@ -71,15 +71,19 @@ class Template:
         config_file = config_file.replace(self._git_root_dir, "")
         if self._is_file_ignored(config_file, self._git_root_dir):
             return
-        git_ignore_file = open('%s/.git/info/exclude'%(self._git_root_dir), 'a+')
+        git_ignore_file = open(
+            '%s/.git/info/exclude' % (self._git_root_dir),
+            'a+')
         git_ignore_file.write("{}\n".format(config_file))
         git_ignore_file.close()
 
     def ignore_secretfy_config_file(self, config_file):
-        """This method ignores the config file which contains template, secrets and extension metadata.
+        """This method ignores the config file which contains template, secrets
+        and extension metadata.
 
         Arguments:
-            config (str): absolute path of the secretfy config file of yaml format
+            config (str): absolute path of the secretfy config file of yaml
+            format
         """
         for config in config_file:
             if not os.path.exists(config):
@@ -88,8 +92,10 @@ class Template:
             config = config.rsplit('/', 1)
             config = config[len(config)-1]
             if self._git_root_dir is not None:
-                for dirpath, dirnames, filenames in os.walk(self._git_root_dir):
-                    for filename in [f for f in filenames if f.endswith(config)]:
+                for dirpath, dirnames, filenames in \
+                        os.walk(self._git_root_dir):
+                    for filename in [
+                            f for f in filenames if f.endswith(config)]:
                         file_name = os.path.join(dirpath, filename)
                         line = open(file_name, 'r').readline()
                         if line == 'secretfy_template':
@@ -103,7 +109,9 @@ class Template:
             config_file (str): absolute path of the genrated configuration
             file.
         """
-        git_ignore_file = open('%s/.git/info/exclude'%(project_git_dir), 'r')
+        git_ignore_file = open(
+            '%s/.git/info/exclude' % (project_git_dir),
+            'r')
         for line in git_ignore_file:
             if config_file.strip() == line.strip():
                 git_ignore_file.close()
