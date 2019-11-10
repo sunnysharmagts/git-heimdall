@@ -1,5 +1,12 @@
 - Test cases
 - Documentation
+- Change the config and baseconfig file to python file so that it can be packaged.
+- README needs to be more discrete.
+  - More data about the mock.
+  - There is too much mentioning of the config. Need separate keywords for each thing.
+  - The mock files needs to be descriptive.
+  - The keys format in the mustache file needs to be descriptive.
+  - Describe the dependencies packages used in this project
 
 Good to have
 -------------
