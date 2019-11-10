@@ -18,9 +18,8 @@ dist/
 *.pyc
 *.egg-info
 
-# Ignore local secretfy config files.
-baseconfig.yaml
-config.yaml
+#Ignore generated config file in /res
+secretfy_template/res/example.*
 
 #Ignore .html files
 *.html
