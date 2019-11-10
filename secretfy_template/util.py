@@ -5,9 +5,9 @@ import os
 import yaml
 import argparse
 import secretfy_template
+from secretfy_template import config
 
 _log = logging.getLogger(__name__)
-
 
 def parse_cli(args=None):
     """Parse command line arguments.
@@ -19,11 +19,10 @@ def parse_cli(args=None):
         argparse.Namespace: Parsed command line arguments.
 
     """
-
+    absolute_path = config.get_config_path()
     default_config_paths = [
-        '~/.baseconfig.yaml',
-        'baseconfig.yaml',
-        'config.yaml',
+        absolute_path + '/baseconfig.yaml',
+        absolute_path + '/config.yaml',
     ]
     parser = argparse.ArgumentParser(prog='secretfy')
 
@@ -51,7 +50,6 @@ def load_config(config_paths):
     for config_path in config_paths:
         config_path = os.path.expanduser(config_path)
         _log.info('Looking for %s', config_path)
-
         if not os.path.isfile(config_path):
             continue
 

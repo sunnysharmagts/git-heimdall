@@ -1,0 +1,4 @@
+recursive-include secretfy_template/res secrets.*
+recursive-include secretfy_template/res *.mustache
+include secretfy_template/config.yaml
+include secretfy_template/baseconfig.yaml

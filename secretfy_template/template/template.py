@@ -7,12 +7,14 @@ This module defines the :class:`Template` class that read the template and
 secret file and generates the final configuration file.
 """
 
-
+import logging
 import os
 import os.path
 import jinja2
 import git
 from secretfy_template.secret import manager
+
+_log = logging.getLogger(__name__)
 
 
 class Template:
@@ -62,7 +64,10 @@ class Template:
             config_file (str): absolute path of the genrated configuration
             file.
         """
-        self._git_root_dir = self._get_git_repo_path(config_file)
+        try:
+            self._git_root_dir = self._get_git_repo_path(config_file)
+        except git.exc.InvalidGitRepositoryError:
+            return
         config_file = config_file.replace(self._git_root_dir, "")
         if self._is_file_ignored(config_file, self._git_root_dir):
             return
@@ -82,13 +87,14 @@ class Template:
             file_name = None
             config = config.rsplit('/', 1)
             config = config[len(config)-1]
-            for dirpath, dirnames, filenames in os.walk(self._git_root_dir):
-                for filename in [f for f in filenames if f.endswith(config)]:
-                    file_name = os.path.join(dirpath, filename)
-                    line = open(file_name, 'r').readline()
-                    if line == 'secretfy_template':
-                        break
-            self.exclude_from_git(file_name)
+            if self._git_root_dir is not None:
+                for dirpath, dirnames, filenames in os.walk(self._git_root_dir):
+                    for filename in [f for f in filenames if f.endswith(config)]:
+                        file_name = os.path.join(dirpath, filename)
+                        line = open(file_name, 'r').readline()
+                        if line == 'secretfy_template':
+                            break
+                self.exclude_from_git(file_name)
 
     def _is_file_ignored(self, config_file, project_git_dir):
         """Add the configuration file to exclude configuration.
