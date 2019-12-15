@@ -23,4 +23,15 @@ setuptools.setup(name='secretfy-config-creator',
                      }
                  },
                  include_package_data=True,
-                 )
+    # Reference for classifiers: https://pypi.org/classifiers/
+                 classifiers=[
+                     'Development Status :: 2 - Pre-Alpha',
+                     'Intended Audience :: Developers',
+                     'Intended Audience :: End Users/Desktop',
+                     'Intended Audience :: Information Technology',
+                     'License :: OSI Approved :: MIT License',
+                     'Operating System :: OS Independent',
+                     'Programming Language :: Python :: 3',
+                     'Topic :: System :: Monitoring',
+                 ],
+                )
