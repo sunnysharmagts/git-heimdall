@@ -5,6 +5,8 @@ import os
 import yaml
 import argparse
 from secretfy_template import config
+import secretfy_template
+import ntpath
 
 _log = logging.getLogger(__name__)
 
@@ -40,8 +42,26 @@ def parse_cli(args=None):
         help='generate mock config file with mock configuration \
             param at /tmp/secretfy-config-creator')
 
-    # parser.add_argument('-v', '--version',
-    # version='%(prog)s'+secretfy_template.__version__)
+    parser.add_argument('-v', '--version', action='version',
+    version='%(prog)s' + secretfy_template.__version__)
+
+    parser.add_argument(
+        '-e',
+        '--extension',
+        nargs='*',
+        help='extension of the template files')
+
+    parser.add_argument(
+        '-s',
+        '--secret',
+        nargs='*',
+        help='secret file path')
+
+    parser.add_argument(
+        '-r',
+        '--repo',
+        nargs='*',
+        help='your project\'s absolute path')
 
     args = parser.parse_args(args)
     return args

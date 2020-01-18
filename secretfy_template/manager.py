@@ -10,6 +10,21 @@ def main():
     # path and desired configuration file extension.
     template_manager = manager.TemplateManager()
     args = util.parse_cli()
+    if args.extension is not None or args.repo is not None or args.secret is not None:
+        if args.repo is None:
+            print("--repo path required")
+            return
+        elif args.extension is None:
+            print("--extension required")
+            return
+        elif args.secret is None:
+            print("--secret required")
+            return
+        elif args.secret is None:
+            print("--secret required")
+            return
+        template_manager.get_all_template_files(args.repo, args.extension, args.secret)
+        return
     config_list = util.load_config(args.config)
     for config in config_list:
         template_manager.generate(**config)
