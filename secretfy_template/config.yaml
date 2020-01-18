@@ -1,13 +1,12 @@
 secretfy_template:
-  -
     secret: res/secrets.yaml
-    template: res/example.yaml.mustache
-    extension: yaml
-  -
-    secret: res/secrets.json
-    template: res/example.json.mustache
-    extension: json
-  -
-    secret: res/secrets.xml
-    template: res/example.xml.mustache
-    extension: xml
+    templates:
+        -
+          file: res/example.yaml.mustache
+          extension: yaml
+        -
+          file: res/example.json.mustache
+          extension: json
+        -
+          file: res/example.xml.mustache
+          extension: xml
