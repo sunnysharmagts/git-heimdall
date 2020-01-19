@@ -20,19 +20,17 @@ What is Secretfy-config-creator?
 --------------------------------
 
 Secretfy-config-creator is a tool for generating config files dynamically from
-your template files, without worrying about committing any sensitive data which
-resides in your configuration file to github. The templates are also
-configuration files, just that the sensitive values in the config file are
-replaced by mustache object. The secretfy-config-creator tool generator the
-required configuration file with help of secrets file which would contain the
-real sensitive values required for actual config file.
+your template files. The templates are nothing but configuration files, which
+holds your configuration in mustache format. The secretfy-config-creator tool
+generator the required configuration file with help of secrets file which would
+contain the real values required for actual config/properties file.
 
 Why Secretfy-config-creator?
 ----------------------------
 Let's just say you have a set of configuration which you keep in a file
-config.yaml or config.json. These configuration might have some highly
-sensitive information required to execute your project like your user
-credentials, email, phone number, private key etc. Everytime, in your
+config.yaml, config.json, application.properties etc. These configuration might
+have some highly sensitive information required to execute your project like
+your user credentials, email, phone number, private key etc. Everytime, in your
 development process, you need to add these sensitive values to the config file
 and remove them before committing the code into github.
 
@@ -46,8 +44,8 @@ usual approach of running the project. The best part is that you don't have to
 worry about accidently commit the actual config file to the git repo. That file
 won't be shown in git status unless you forcibly add it.
 
-Install
--------
+Installation
+------------
 
 This section provides quick steps of how to setup this tool.
 
@@ -68,6 +66,127 @@ This section provides quick steps of how to setup this tool.
    The above command creates mock templates, secrets file at
    ``/tmp/secretfy-config-creator`` directory. The ``-c`` or ``--config``
    option is for providing your config.yaml file.
+
+How to Use
+----------
+
+This section provides samples of how to use this tool.
+
+Secretfy-config-creator consist of 3 components :-
+
+**Secrets file** - This file can be in yaml, json and xml format.
+
+**Template files** - These files are configuration files in template format. For
+eg:- If you have a file `config.json` then your template file will be
+`config.json.mustache`.
+
+**Extension** - This is the file extension of your configuration file. Following
+are the example config files and their respective extension.
+
+   .. code-block:: sh
+
+    a. config.yaml       : yaml
+    b. config.xml        : xml
+    c. config.json       : json
+    d. config.properties : properties
+
+These parameters can be added to a ``baseconfig.yaml`` file in the following way
+
+   .. code-block:: sh
+
+    secretfy_template:
+        secret: res/secrets.yaml
+        templates:
+            -
+              file: res/example.yaml.mustache
+              extension: yaml
+            -
+              file: res/example.json.mustache
+              extension: json
+            -
+              file: res/example.xml.mustache
+              extension: xml
+
+
+The ``baseconfig.yaml`` file starts with ``secretfy_template`` tag.
+
+1. ``secret`` is the absolute path of the secrets file containing sensitive
+values.
+
+2. ``templates`` tag is an array of template files. All these files are in
+``.mustache`` format whose sensitive values resides in ``secrets.yaml`` file.
+
+* ``file`` is the absolute path of the template file.
+* ``extension`` is the extension of the configuration file which will be generated from the template file.
+
+``NOTE: Make sure that the template file are in <file_name>.<extension>.<mustache> format.``
+
+Run the following command to generate the config files.
+
+   .. code-block:: sh
+
+    secretfy -c baseconfig.yaml
+
+This will create config files in the respective directories. Note that these
+configurations won't be seen in git history. You can check that by doing ``git
+status``.
+
+
+Samples
+-------
+
+**secrets.yaml**
+
+   .. code-block:: sh
+
+    secrets:
+        item:
+            val1: foo@bar.com
+            val2: my_password
+        item1:
+            val3: username
+            val4: my_private_key
+
+
+**example.yaml.mustache**
+
+   .. code-block:: sh
+
+    secrets:
+      item:
+          val1: {{secrets.item.val1}}
+          val2: {{secrets.item.val2}}
+          result: This is just a dummy description.
+      item1:
+          val3: {{secrets.item1.val3}}
+          val4: {{secrets.item1.val4}}
+          result: This is another dummy description.
+
+
+The `secrets.yaml` file contains the sensitive information and
+`example.yaml.mustache` is the template file which contains the keys in
+`mustache` format. Hence the key `secrets.item.val2` has value `my_password`
+which will be populated via `secretfy` tool.
+
+``NOTE: You can run `secretfy -m` to get more sample baseconfig, templates,
+secret files. These files will get generated at `/tmp/secretfy-config-creator`.``
+
+
+FAQ
+---
+
+**How can i deploy my code in CICD pipeline or on remote server since it
+doesn't have config files and needs to be generated.**
+
+You can generate all the config files required for your repository to compile
+and run in CICD pipeline or at remote server by the following command.
+
+   .. code-block:: sh
+
+    secretfy -e mustache -s <secrets_file_path> -r <repository_path>
+
+``-e`` is the template extension, ``-s`` is the absolute path of the secrets file
+and ``-r`` is absolute path of the repository
 
 
 Support
