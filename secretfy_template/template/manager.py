@@ -45,9 +45,9 @@ class TemplateManager:
         self.move_files(dir, "json")
         self.move_files(dir, "xml")
         baseconfig = config.get_absolute_path('baseconfig.yaml')
-        conf = config.get_absolute_path('config.yaml')
+        conf = config.get_absolute_path('baseconfig1.yaml')
         shutil.copyfile(baseconfig, dir+'/baseconfig.yaml')
-        shutil.copyfile(conf, dir+'/config.yaml')
+        shutil.copyfile(conf, dir+'/baseconfig1.yaml')
 
     def move_files(self, root, format):
         dir = root + "/" + format

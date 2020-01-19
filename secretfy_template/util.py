@@ -24,7 +24,7 @@ def parse_cli(args=None):
     absolute_path = config.get_config_path()
     default_config_paths = [
         absolute_path + '/baseconfig.yaml',
-        absolute_path + '/config.yaml',
+        absolute_path + '/baseconfig1.yaml',
     ]
     parser = argparse.ArgumentParser(prog='secretfy')
 
