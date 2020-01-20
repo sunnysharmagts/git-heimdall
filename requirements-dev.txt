@@ -6,3 +6,4 @@ pylama
 pylama-pylint
 wheel
 gitpython
+twine
