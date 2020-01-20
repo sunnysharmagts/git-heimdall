@@ -83,29 +83,29 @@ eg:- If you have a file `config.json` then your template file will be
 **Extension** - This is the file extension of your configuration file. Following
 are the example config files and their respective extension.
 
-   .. code-block:: sh
+.. code-block:: sh
 
-    a. config.yaml       : yaml
-    b. config.xml        : xml
-    c. config.json       : json
-    d. config.properties : properties
+  a. config.yaml       : yaml
+  b. config.xml        : xml
+  c. config.json       : json
+  d. config.properties : properties
 
 These parameters can be added to a ``baseconfig.yaml`` file in the following way
 
-   .. code-block:: sh
+.. code-block:: sh
 
-    secretfy_template:
-        secret: res/secrets.yaml
-        templates:
-            -
-              file: res/example.yaml.mustache
-              extension: yaml
-            -
-              file: res/example.json.mustache
-              extension: json
-            -
-              file: res/example.xml.mustache
-              extension: xml
+  secretfy_template:
+      secret: res/secrets.yaml
+      templates:
+          -
+            file: res/example.yaml.mustache
+            extension: yaml
+          -
+            file: res/example.json.mustache
+            extension: json
+          -
+            file: res/example.xml.mustache
+            extension: xml
 
 
 The ``baseconfig.yaml`` file starts with ``secretfy_template`` tag.
@@ -123,9 +123,9 @@ values.
 
 Run the following command to generate the config files.
 
-   .. code-block:: sh
+.. code-block:: sh
 
-    secretfy -c baseconfig.yaml
+  secretfy -c baseconfig.yaml
 
 This will create config files in the respective directories. Note that these
 configurations won't be seen in git history. You can check that by doing ``git
@@ -137,30 +137,30 @@ Samples
 
 **secrets.yaml**
 
-   .. code-block:: sh
+.. code-block:: sh
 
-    secrets:
-        item:
-            val1: foo@bar.com
-            val2: my_password
-        item1:
-            val3: username
-            val4: my_private_key
+  secrets:
+      item:
+          val1: foo@bar.com
+          val2: my_password
+      item1:
+          val3: username
+          val4: my_private_key
 
 
 **example.yaml.mustache**
 
-   .. code-block:: sh
+.. code-block:: sh
 
-    secrets:
-      item:
-          val1: {{secrets.item.val1}}
-          val2: {{secrets.item.val2}}
-          result: This is just a dummy description.
-      item1:
-          val3: {{secrets.item1.val3}}
-          val4: {{secrets.item1.val4}}
-          result: This is another dummy description.
+  secrets:
+    item:
+        val1: {{secrets.item.val1}}
+        val2: {{secrets.item.val2}}
+        result: This is just a dummy description.
+    item1:
+        val3: {{secrets.item1.val3}}
+        val4: {{secrets.item1.val4}}
+        result: This is another dummy description.
 
 
 The `secrets.yaml` file contains the sensitive information and
@@ -181,9 +181,9 @@ doesn't have config files and needs to be generated.**
 You can generate all the config files required for your repository to compile
 and run in CICD pipeline or at remote server by the following command.
 
-   .. code-block:: sh
+.. code-block:: sh
 
-    secretfy -e mustache -s <secrets_file_path> -r <repository_path>
+  secretfy -e mustache -s <secrets_file_path> -r <repository_path>
 
 ``-e`` is the template extension, ``-s`` is the absolute path of the secrets file
 and ``-r`` is absolute path of the repository
