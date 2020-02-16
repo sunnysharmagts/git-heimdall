@@ -1,13 +1,5 @@
 - Test cases
 - Documentation
-- README needs to be more discrete.
-  - More data about the mock.
-  - There is too much mentioning of the config. Need separate keywords for each thing.
-  - The mock files needs to be descriptive.
-  - The keys format in the mustache file needs to be descriptive.
-  - Describe the dependencies packages used in this project
-
-- Generate all configuration files from templates in a project.
 - Generate template file from config file.
 
 Good to have
@@ -18,3 +10,13 @@ As per my current thought I think there should be a creator API which will creat
 
 - the template file will replace sensitive data in the config file like email id , password, hash etc with mustache data.
 - create secrets.yaml file automatically from the configurations file. In case if the config file is already created then, append sensitive data in the secrets.yaml file
+
+
+CHECK COMMIT FILES
+------------------
+
+1) Initialize a generate a hook in pre-commit. The pre-commit should run a
+python script which would check if there are any sensitive data in the
+committed files or not.
+2) Use trufflehog to do this.
+3) The diff needs to be pulled in the latest commit.
