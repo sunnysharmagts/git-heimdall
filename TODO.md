@@ -20,3 +20,11 @@ python script which would check if there are any sensitive data in the
 committed files or not.
 2) Use trufflehog to do this.
 3) The diff needs to be pulled in the latest commit.
+
+    Code Flow
+    =========
+
+    1) Create a `pre-commit` file for checking the checkin code. This can be done by running a secretfy command like `secretfy init`.
+    2) Once any commit is done it would trigger the codescan module of the secretfy tool and would send the staged files changes to that module.
+    3) The codescan module would scan the code and inform about any sensitive data present in the commit. 
+    4) The committer can go ahead and change the code OR commit the existing code since there can be false positive cases or the committer doesn't care :).
