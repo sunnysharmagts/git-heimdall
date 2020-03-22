@@ -1,5 +1,6 @@
 recursive-include secretfy_template/res secrets.*
 recursive-include secretfy_template/res *.mustache
+recursive-include secretfy_template/res/heimdall *
 include secretfy_template/baseconfig1.yaml
 include secretfy_template/baseconfig.yaml
 include requirements-dev.txt
