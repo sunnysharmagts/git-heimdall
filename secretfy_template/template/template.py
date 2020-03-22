@@ -50,9 +50,6 @@ class Template:
         result = src.render(**d)
         file.write(result)
         file.close()
-        # The secrets file shouldn't be seen in `git status` too.
-        # TODO: Check whether the secrets file is inside the git repository or
-        # not.
         self.exclude_from_git(secrets)
         return config_file
 

@@ -2,14 +2,22 @@
 
 from secretfy_template import util
 from secretfy_template.template import manager
-
+from secretfy_template.codescan import manager as codescan
+import sys
 
 def main():
     """Runs the tool to parse the config. """
     # Read the provided config file which contains the template, secrets file
     # path and desired configuration file extension.
     template_manager = manager.TemplateManager()
+    codescan_manager = codescan.CodescanManager()
     args = util.parse_cli()
+    if args.init:
+        codescan_manager.init()
+        return
+    if args.codescan is not None:
+        codescan_manager.scan(sys.argv[2:])
+        return
     if args.extension is not None or args.repo is not None or args.secret is not None:
         if args.repo is None:
             print("--repo path required")

@@ -1,0 +1,10 @@
+echo "PRE-COMMIT MESSAGE >>>>"
+file_name=$(git diff --cached --name-only --diff-filter=ACM)
+echo ":::::::File name is: " $PWD " -- " $file_name
+diff=$(git diff --cached $file_name | tail -n +6)
+#diff=$( git diff --cached $file_name )
+#echo "Difference: "$diff
+#output=$( python .git/hooks/my_commit.py )
+output=$( secretfy -scan $PWD $file_name )
+echo "This is value: "$output
+exit 1

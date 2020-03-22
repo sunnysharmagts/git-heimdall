@@ -63,6 +63,18 @@ def parse_cli(args=None):
         nargs='*',
         help='your project\'s absolute path')
 
+    parser.add_argument(
+        '-scan',
+        '--codescan',
+        nargs='*',
+        help='your project\'s absolute path')
+
+    parser.add_argument(
+        '-i',
+        '--init',
+        action='store_true',
+        help='your project\'s absolute path')
+
     args = parser.parse_args(args)
     return args
 
