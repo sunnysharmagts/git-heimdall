@@ -14,25 +14,25 @@ def main():
     args = util.parse_cli()
     if args.init:
         codescan_manager.init()
-        return
+        return None
     if args.codescan is not None:
         codescan_manager.scan(sys.argv[2:])
         return
     if args.extension is not None or args.repo is not None or args.secret is not None:
         if args.repo is None:
             print("--repo path required")
-            return
+            return None
         elif args.extension is None:
             print("--extension required")
-            return
+            return None
         elif args.secret is None:
             print("--secret required")
-            return
+            return None
         elif args.secret is None:
             print("--secret required")
-            return
+            return None
         template_manager.get_all_template_files(args.repo, args.extension, args.secret)
-        return
+        return None
     config_list = util.load_config(args.config)
     for config in config_list:
         template_manager.generate(**config)
@@ -40,3 +40,4 @@ def main():
             template_manager.ignore_secretfy_config_file(args.config)
     if args.mock:
         template_manager.move_mock_files()
+    return None

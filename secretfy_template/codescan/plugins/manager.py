@@ -15,5 +15,6 @@ class CodescanPluginManager:
         self.plugins.append(secrets_checker.SecretsChecker())
 
     def scan(self, files):
-        for plugin in self.plugins:
-            plugin.scan(files)
+        #for plugin in self.plugins:
+        _val = self.plugins[0].scan(files)
+        return _val
