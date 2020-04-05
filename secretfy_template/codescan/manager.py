@@ -36,9 +36,10 @@ class CodescanManager:
         _git_config_file_append_mode.close()
 
     def scan(self, argv):
-        if len(argv) > 0:
+        if len(argv) > 1:
             _repo_abs_dir_path = argv[0]
             _files = []
-            for file in argv:
+            _file_name_list = argv[1].split()
+            for file in _file_name_list:
                 _files.append(os.path.join(_repo_abs_dir_path, file))
             self.plugin_manager.scan(_files)
