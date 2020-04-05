@@ -19,7 +19,7 @@ setuptools.setup(name='secretfy-config-creator',
 
                  entry_points={
                      'console_scripts': {
-                         'secretfy=secretfy_template.manager:main'
+                         'heimdall=secretfy_template.manager:main'
                      }
                  },
                  include_package_data=True,
