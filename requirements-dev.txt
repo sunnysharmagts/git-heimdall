@@ -8,3 +8,4 @@ wheel
 gitpython
 twine
 termcolor
+trufflehog
