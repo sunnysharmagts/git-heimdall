@@ -7,3 +7,4 @@ pylama-pylint
 wheel
 gitpython
 twine
+termcolor
