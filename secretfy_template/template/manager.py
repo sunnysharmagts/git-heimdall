@@ -35,9 +35,9 @@ class TemplateManager:
 
     def move_mock_files(self):
         """Move the mock template, secret and config files to
-        /tmp/secretfy-config-creator
+        /tmp/git-heimdall
         """
-        dir = '/tmp/secretfy-config-creator'
+        dir = '/tmp/git-heimdall'
         dir_exists = path.exists(dir)
         if not dir_exists:
             os.mkdir(dir)

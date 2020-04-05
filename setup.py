@@ -7,9 +7,9 @@ _requires = open('requirements-dev.txt').read().splitlines()
 _long_description = open('README.rst').read()
 _version = secretfy_template.__version__
 
-setuptools.setup(name='secretfy-config-creator',
+setuptools.setup(name='git-heimdall',
                  version=_version,
-                 description='Tool to create configuration file from secret\
+                 description='Tool to scan staged files before commit and provide functionality to create configuration file from secret\
                     templates',
                  author='Sunny Sharma',
                  author_email='sunnysharmagts@gmail.com',
@@ -23,7 +23,7 @@ setuptools.setup(name='secretfy-config-creator',
                      }
                  },
                  include_package_data=True,
-    # Reference for classifiers: https://pypi.org/classifiers/
+                 # Reference for classifiers: https://pypi.org/classifiers/
                  classifiers=[
                      'Development Status :: 2 - Pre-Alpha',
                      'Intended Audience :: Developers',

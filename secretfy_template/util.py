@@ -26,7 +26,7 @@ def parse_cli(args=None):
         absolute_path + '/baseconfig.yaml',
         absolute_path + '/baseconfig1.yaml',
     ]
-    parser = argparse.ArgumentParser(prog='secretfy')
+    parser = argparse.ArgumentParser(prog='heimdall')
 
     parser.add_argument(
         '-c',
@@ -40,7 +40,7 @@ def parse_cli(args=None):
         '--mock',
         action='store_true',
         help='generate mock config file with mock configuration \
-            param at /tmp/secretfy-config-creator')
+            param at /tmp/git-heimdall')
 
     parser.add_argument('-v', '--version', action='version',
     version='%(prog)s' + secretfy_template.__version__)
