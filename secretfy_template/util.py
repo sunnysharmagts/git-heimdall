@@ -21,12 +21,39 @@ def parse_cli(args=None):
         argparse.Namespace: Parsed command line arguments.
 
     """
+
+    parser = argparse.ArgumentParser(prog='heimdall')
+
+    parser.add_argument('-v', '--version', action='version',
+    version='%(prog)s' + secretfy_template.__version__)
+
+    parser.add_argument(
+        '-scan',
+        '--codescan',
+        nargs='*',
+        help='your project\'s absolute path')
+
+    parser.add_argument(
+        '-i',
+        '--init',
+        action='store_true',
+        help='Initialize Heimdall tool')
+
+    _heimdall_sub_parser = parser.add_subparsers()
+    _secretfy_parser = _heimdall_sub_parser.add_parser('secretfy', help='secretfy command')
+
+    add_secretfy_arguments(_secretfy_parser)
+
+    args = parser.parse_args(args)
+    return args
+
+def add_secretfy_arguments(parser):
+
     absolute_path = config.get_config_path()
     default_config_paths = [
         absolute_path + '/baseconfig.yaml',
         absolute_path + '/baseconfig1.yaml',
     ]
-    parser = argparse.ArgumentParser(prog='heimdall')
 
     parser.add_argument(
         '-c',
@@ -41,9 +68,6 @@ def parse_cli(args=None):
         action='store_true',
         help='generate mock config file with mock configuration \
             param at /tmp/git-heimdall')
-
-    parser.add_argument('-v', '--version', action='version',
-    version='%(prog)s' + secretfy_template.__version__)
 
     parser.add_argument(
         '-e',
@@ -62,21 +86,6 @@ def parse_cli(args=None):
         '--repo',
         nargs='*',
         help='your project\'s absolute path')
-
-    parser.add_argument(
-        '-scan',
-        '--codescan',
-        nargs='*',
-        help='your project\'s absolute path')
-
-    parser.add_argument(
-        '-i',
-        '--init',
-        action='store_true',
-        help='your project\'s absolute path')
-
-    args = parser.parse_args(args)
-    return args
 
 
 def load_config(config_paths):
