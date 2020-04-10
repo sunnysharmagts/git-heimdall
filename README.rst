@@ -1,8 +1,8 @@
-Secretfy-config-creator
-=======================
+Git-Heimdall
+=============
 
-Secretfy-config-creator is a tool for creating configuration files from
-existing template files.
+Git-Heimdall is a guardian/gatekeeper tool for scanning sensitive data before
+committing files to github. It also provides functionality for creating configuration files from existing template files.
 
 .. image:: https://img.shields.io/badge/source-blue.svg?
    :target: https://github.com/sunnysharmagts/Secretfy-config-creator/tree/master/secretfy_template
@@ -16,17 +16,59 @@ Contents
 .. contents:: Table of Contents:
     :backlinks: none
 
-What is Secretfy-config-creator?
+What is Git-Heimdall ?
+----------------------
+
+Git-Heimdall is a tool for scanning sensitive data before the staged files are
+added to a commit. So, if a developer makes some changes into his repository and
+tries to commit those changes via `git commit`, those files will be first
+scanned by `HEIMDALL` to check whether there are any sensitive data in those
+changes that are going to be pushed into repo and informs developer about it.
+This process is automated and nothing extra is done for scanning those files.
+Infact those files are scanned automatically when git commit is called.
+
+
+Why Git-Heimdall ?
+------------------
+
+Committing sensitive data has been one of the most common vulnerabilties in security world. Developers commit sensitive data and expose it to internet without even realising about it.
+
+This is where Heimdall comes in. Heimdall provides a set of functionalities like :-
+
+- Scanning files before commit to track secrets
+- Keep configuration files in template format so that there are lesser chances of changing the config file and committing of secrets.(`More about Git-Heimdall secretfy`_)
+
+
+Installation
+------------
+
+This section provides quick steps of how to setup this tool.
+
+1. Create a virtual Python environment and install Git-heimdall in it.
+
+   .. code-block:: sh
+
+    python3 -m venv vheimdall
+    . vheimdall/bin/activate
+    pip3 install secretfy-config-creator
+    heimdall -i
+
+2. Run Sanity test
+
+   .. code-block:: sh
+
+    heimdall secretfy -m
+
+   The above command creates mock templates, secrets file at
+   ``/tmp/git-heimdall`` directory. The ``-c`` or ``--config``
+   option is for providing your config.yaml file.
+
+
+More about Git-Heimdall secretfy
 --------------------------------
 
-Secretfy-config-creator is a tool for generating config files dynamically from
-your template files. The templates are nothing but configuration files, which
-holds your configuration in mustache format. The secretfy-config-creator tool
-generator the required configuration file with help of secrets file which would
-contain the real values required for actual config/properties file.
+`heimdall secretfy` is a option in heimdall tool for generating config files dynamically from your template files. The templates are nothing but configuration files, which holds your configuration in mustache format. `secretfy` tool generates the required configuration file with help of secrets file which would contain the real values required for actual config/properties file.
 
-Why Secretfy-config-creator?
-----------------------------
 Let's just say you have a set of configuration which you keep in a file
 config.yaml, config.json, application.properties etc. These configuration might
 have some highly sensitive information required to execute your project like
@@ -44,35 +86,83 @@ usual approach of running the project. The best part is that you don't have to
 worry about accidently commit the actual config file to the git repo. That file
 won't be shown in git status unless you forcibly add it.
 
-Installation
+
+Development
 ------------
 
-This section provides quick steps of how to setup this tool.
+This section describes how to set up a development environment for Git-Heimdall. This section is useful for those who would like to contribute to Git-Heimdall or run Git-Heimdall directly from its source.
 
-1. Create a virtual Python environment and install Secretfy-config-creator in it.
+We use primarily three tools to perform development on this project: Python 3, Git, and Make. Your system may already have these tools. But if not, here are some brief instructions on how they can be installed.
+
+On macOS, if you have `Homebrew <https://brew.sh/>`_ installed, then
+these tools can be be installed easily with the following command:
+
+.. code-block:: sh
+
+ brew install python git
+
+On a Debian GNU/Linux system or in another Debian-based Linux
+distribution, they can be installed with the following commands:
+
+.. code-block:: sh
+
+ apt-get update
+ apt-get install python3 python3-venv git make
+
+On any other system, we hope you can figure out how to install these
+tools yourself.
+
+2. Clone the project repository and enter its top-level directory:
 
    .. code-block:: sh
 
-    virtualenv vsecretfy
-    source vsecretfy/bin/activate
-    python3 setup.py install
+    git clone https://github.com/sunnysharmagts/Secretfy-config-creator
+    cd Secretfy-config-creator
 
-2. Run Sanity test
+3. Create a virtual Python environment for development purpose:
 
    .. code-block:: sh
 
-    secretfy -m
+    make vheimdall deps
 
-   The above command creates mock templates, secrets file at
-   ``/tmp/secretfy-config-creator`` directory. The ``-c`` or ``--config``
-   option is for providing your config.yaml file.
+   This creates a virtual Python environment at ``~/.vheimdall/git-heimdall``.
+   Additionally, it also creates a convenience script named ``vheimdall`` in
+   the current directory to easily activate the virtual Python
+   environment which we will soon see in the next point.
+
+   To undo this step at anytime in future, i.e., delete the virtual
+   Python environment directory, either enter
+   ``rm -rf vheimdall ~/.vheimdall/``.
+
+4. Activate the virtual Python environment:
+
+   .. code-block:: sh
+
+    . ./vheimdall
+
+5. In the top-level directory of the project, enter this command:
+
+   .. code-block:: sh
+
+    python3 -m secretfy_template -i
+
+   This initializes git-heimdall tool. This is just a **one time process** and need not be run everytime, unless if there is any change in the template resources. This command just updates in the location of the git templateDir in ``~/.gitconfig``.
+
+   .. code-block:: sh
+
+    python3 -m secretfy_template secretfy -m
+
+   This generates mock data at ``/tmp/git-heimdall``. This step serves as
+   a sanity check that ensures that the development environment is
+   correctly set up. Also, it gives a brief idea of how to create a config in form of template.
+
 
 How to Use
 ----------
 
 This section provides samples of how to use this tool.
 
-Secretfy-config-creator consist of 3 components :-
+``heimdall secretfy`` consist of 3 components :-
 
 **Secrets file** - This file can be in yaml, json and xml format.
 
@@ -125,15 +215,15 @@ Run the following command to generate the config files.
 
 .. code-block:: sh
 
-  secretfy -c baseconfig.yaml
+  heimdall secretfy -c baseconfig.yaml
 
 This will create config files in the respective directories. Note that these
 configurations won't be seen in git history. You can check that by doing ``git
 status``.
 
 
-Samples
--------
+Config template file samples
+----------------------------
 
 **secrets.yaml**
 
@@ -166,10 +256,9 @@ Samples
 The `secrets.yaml` file contains the sensitive information and
 `example.yaml.mustache` is the template file which contains the keys in
 `mustache` format. Hence the key `secrets.item.val2` has value `my_password`
-which will be populated via `secretfy` tool.
+which will be populated via `heimdall secretfy` tool.
 
-``NOTE: You can run `secretfy -m` to get more sample baseconfig, templates,
-secret files. These files will get generated at `/tmp/secretfy-config-creator`.``
+``NOTE: You can run `heimdall secretfy -m` to get more sample baseconfig, templates, secret files. These files will get generated at `/tmp/git-heimdall`.``
 
 
 FAQ
@@ -183,7 +272,7 @@ and run in CICD pipeline or at remote server by the following command.
 
 .. code-block:: sh
 
-  secretfy -e mustache -s <secrets_file_path> -r <repository_path>
+  heimdall secretfy -e mustache -s <secrets_file_path> -r <repository_path>
 
 ``-e`` is the template extension, ``-s`` is the absolute path of the secrets file
 and ``-r`` is absolute path of the repository
