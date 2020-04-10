@@ -2,7 +2,8 @@ Git-Heimdall
 =============
 
 Git-Heimdall is a guardian/gatekeeper tool for scanning sensitive data before
-committing files to github. It also provides functionality for creating configuration files from existing template files.
+committing files to github. It also provides functionality for creating
+configuration files from existing template files.
 
 .. image:: https://img.shields.io/badge/source-blue.svg?
    :target: https://github.com/sunnysharmagts/Secretfy-config-creator/tree/master/secretfy_template
@@ -31,12 +32,17 @@ Infact those files are scanned automatically when git commit is called.
 Why Git-Heimdall ?
 ------------------
 
-Committing sensitive data has been one of the most common vulnerabilties in security world. Developers commit sensitive data and expose it to internet without even realising about it.
+Committing sensitive data has been one of the most common vulnerabilties in
+security world. Developers commit sensitive data and expose it to internet
+without even realising about it.
 
-This is where Heimdall comes in. Heimdall provides a set of functionalities like :-
+This is where Heimdall comes in. Heimdall provides a set of functionalities
+like :-
 
 - Scanning files before commit to track secrets
-- Keep configuration files in template format so that there are lesser chances of changing the config file and committing of secrets.(`More about Git-Heimdall secretfy`_)
+- Keep configuration files in template format so that there are lesser chances
+  of changing the config file and committing of secrets.(`More about
+  Git-Heimdall secretfy`_)
 
 
 Installation
@@ -67,7 +73,13 @@ This section provides quick steps of how to setup this tool.
 More about Git-Heimdall secretfy
 --------------------------------
 
-`heimdall secretfy` is a option in heimdall tool for generating config files dynamically from your template files. The templates are nothing but configuration files, which holds your configuration in mustache format. `secretfy` tool generates the required configuration file with help of secrets file which would contain the real values required for actual config/properties file.
+`heimdall secretfy` is a option in heimdall tool for generating config files
+dynamically from your template files. The templates are nothing but
+configuration files, which holds your configuration in mustache format.
+
+`secretfy` tool generates the required configuration file with help of secrets
+file which would contain the real values required for actual config/properties
+file.
 
 Let's just say you have a set of configuration which you keep in a file
 config.yaml, config.json, application.properties etc. These configuration might
@@ -90,27 +102,28 @@ won't be shown in git status unless you forcibly add it.
 Development
 ------------
 
-This section describes how to set up a development environment for Git-Heimdall. This section is useful for those who would like to contribute to Git-Heimdall or run Git-Heimdall directly from its source.
+This section describes how to set up a development environment for
+Git-Heimdall. This section is useful for those who would like to contribute to
+Git-Heimdall or run Git-Heimdall directly from its source.
 
-We use primarily three tools to perform development on this project: Python 3, Git, and Make. Your system may already have these tools. But if not, here are some brief instructions on how they can be installed.
+We use primarily three tools to perform development on this project: Python 3,
+Git, and Make. Your system may already have these tools. But if not, here are
+some brief instructions on how they can be installed.
 
-On macOS, if you have `Homebrew <https://brew.sh/>`_ installed, then
-these tools can be be installed easily with the following command:
+1. On macOS, if you have `Homebrew <https://brew.sh/>`_ installed, then these tools can be be installed easily with the following command:
 
-.. code-block:: sh
+   .. code-block:: sh
 
- brew install python git
+    brew install python git
 
-On a Debian GNU/Linux system or in another Debian-based Linux
-distribution, they can be installed with the following commands:
+   On a Debian GNU/Linux system or in another Debian-based Linux distribution, they can be installed with the following commands:
 
-.. code-block:: sh
+   .. code-block:: sh
 
- apt-get update
- apt-get install python3 python3-venv git make
+    apt-get update
+    apt-get install python3 python3-venv git make
 
-On any other system, we hope you can figure out how to install these
-tools yourself.
+   On any other system, we hope you can figure out how to install these tools yourself.
 
 2. Clone the project repository and enter its top-level directory:
 
@@ -146,15 +159,19 @@ tools yourself.
 
     python3 -m secretfy_template -i
 
-   This initializes git-heimdall tool. This is just a **one time process** and need not be run everytime, unless if there is any change in the template resources. This command just updates in the location of the git templateDir in ``~/.gitconfig``.
+   This initializes git-heimdall tool. This is just a **one time process** and
+   need not be run everytime, unless if there is any change in the template
+   resources. This command just updates in the location of the git templateDir
+   in ``~/.gitconfig``.
 
    .. code-block:: sh
 
     python3 -m secretfy_template secretfy -m
 
-   This generates mock data at ``/tmp/git-heimdall``. This step serves as
-   a sanity check that ensures that the development environment is
-   correctly set up. Also, it gives a brief idea of how to create a config in form of template.
+   This generates mock data at ``/tmp/git-heimdall``. This step serves as a
+   sanity check that ensures that the development environment is correctly set
+   up. Also, it gives a brief idea of how to create a config in form of
+   template.
 
 
 How to Use
@@ -207,7 +224,8 @@ values.
 ``.mustache`` format whose sensitive values resides in ``secrets.yaml`` file.
 
 * ``file`` is the absolute path of the template file.
-* ``extension`` is the extension of the configuration file which will be generated from the template file.
+* ``extension`` is the extension of the configuration file which will be
+  generated from the template file.
 
 ``NOTE: Make sure that the template file are in <file_name>.<extension>.<mustache> format.``
 
