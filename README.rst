@@ -72,7 +72,7 @@ This section provides quick steps of how to setup this tool.
 More about Git-Heimdall secretfy
 --------------------------------
 
-*git-heimdall* provides *secretfy* option for generating config files
+git-heimdall provides ``secretfy`` option for generating config files
 dynamically from your template files. The templates are nothing but
 configuration files, which holds your configuration in mustache format.
 
