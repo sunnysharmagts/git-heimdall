@@ -55,7 +55,7 @@ This section provides quick steps of how to setup this tool.
 
     python3 -m venv vheimdall
     . vheimdall/bin/activate
-    pip3 install git-heimdall==0.0.1a1
+    pip3 install git-heimdall
     heimdall -i
 
 2. Run Sanity test
