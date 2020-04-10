@@ -6,10 +6,10 @@ committing files to github. It also provides functionality for creating
 configuration files from existing template files.
 
 .. image:: https://img.shields.io/badge/source-blue.svg?
-   :target: https://github.com/sunnysharmagts/Secretfy-config-creator/tree/master/secretfy_template
+   :target: https://github.com/sunnysharmagts/git-heimdall/tree/master/secretfy_template
 
 .. image:: https://img.shields.io/badge/license-MIT-blue.svg?
-   :target: https://github.com/sunnysharmagts/Secretfy-config-creator/blob/master/LICENSE.md
+   :target: https://github.com/sunnysharmagts/git-heimdall/blob/master/LICENSE.md
 
 Contents
 --------
@@ -55,7 +55,7 @@ This section provides quick steps of how to setup this tool.
 
     python3 -m venv vheimdall
     . vheimdall/bin/activate
-    pip3 install secretfy-config-creator
+    pip3 install git-heimdall==0.0.1a1
     heimdall -i
 
 2. Run Sanity test
@@ -128,8 +128,8 @@ some brief instructions on how they can be installed.
 
    .. code-block:: sh
 
-    git clone https://github.com/sunnysharmagts/Secretfy-config-creator
-    cd Secretfy-config-creator
+    git clone https://github.com/sunnysharmagts/git-heimdall
+    cd git-heimdall
 
 3. Create a virtual Python environment for development purpose:
 
@@ -313,7 +313,7 @@ Support
 -------
 
 To report bugs, suggest improvements, or ask questions, please create a
-new issue at https://github.com/sunnysharmagts/Secretfy-config-creator/issues.
+new issue at https://github.com/sunnysharmagts/git-heimdall/issues.
 
 
 License
@@ -327,4 +327,4 @@ This software is provided WITHOUT ANY WARRANTY; without even the implied
 warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
 `LICENSE.md`_ for the complete disclaimer.
 
-.. _LICENSE.md: https://github.com/sunnysharmagts/Secretfy-config-creator/blob/master/LICENSE.md
+.. _LICENSE.md: https://github.com/sunnysharmagts/git-heimdall/blob/master/LICENSE.md
