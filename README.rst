@@ -17,31 +17,30 @@ Contents
 .. contents:: Table of Contents:
     :backlinks: none
 
-What is Git-Heimdall ?
+What is Git-Heimdall?
 ----------------------
 
 Git-Heimdall is a tool for scanning sensitive data before the staged files are
-added to a commit. So, if a developer makes some changes into his repository and
+added to a commit. So, if a developer makes some changes in his repository and
 tries to commit those changes via `git commit`, those files will be first
-scanned by `HEIMDALL` to check whether there are any sensitive data in those
-changes that are going to be pushed into repo and informs developer about it.
-This process is automated and nothing extra is done for scanning those files.
-Infact those files are scanned automatically when git commit is called.
+scanned by *Git-Heimdall* to check whether there are any sensitive data in those
+changes and informs developer about it.
+
+This process is automated. You don't have to run extra commands in order to scan those files. Infact those files are scanned automatically when git commit is called.
 
 
-Why Git-Heimdall ?
+Why Git-Heimdall?
 ------------------
 
-Committing sensitive data has been one of the most common vulnerabilties in
+Committing sensitive data has been one of the most common vulnerabilities in
 security world. Developers commit sensitive data and expose it to internet
 without even realising about it.
 
-This is where Heimdall comes in. Heimdall provides a set of functionalities
-like :-
+This is where Git-Heimdall comes in. Git-Heimdall provides a set of functionalities like :-
 
 - Scanning files before commit to track secrets
-- Keep configuration files in template format so that there are lesser chances
-  of changing the config file and committing of secrets.(`More about
+- Keep configuration files in template format so that there are less chances
+  of everytime modifying the config file and committing of secrets.(`More about
   Git-Heimdall secretfy`_)
 
 
@@ -73,11 +72,11 @@ This section provides quick steps of how to setup this tool.
 More about Git-Heimdall secretfy
 --------------------------------
 
-`heimdall secretfy` is a option in heimdall tool for generating config files
+*git-heimdall* provides *secretfy* option for generating config files
 dynamically from your template files. The templates are nothing but
 configuration files, which holds your configuration in mustache format.
 
-`secretfy` tool generates the required configuration file with help of secrets
+``secretfy`` tool generates the required configuration file with help of secrets
 file which would contain the real values required for actual config/properties
 file.
 
