@@ -161,7 +161,7 @@ some brief instructions on how they can be installed.
    This initializes git-heimdall tool. This is just a **one time process** and
    need not be run everytime, unless if there is any change in the template
    resources. This command just updates in the location of the git templateDir
-   in ``~/.gitconfig``.
+   in git configuration.
 
    .. code-block:: sh
 
@@ -171,6 +171,20 @@ some brief instructions on how they can be installed.
    sanity check that ensures that the development environment is correctly set
    up. Also, it gives a brief idea of how to create a config in form of
    template.
+
+6. Now to simulate the environment and test the tool. Do the following:-
+
+   .. code-block:: sh
+
+    . ~/.vheimdall/git-heimdall/bin/activate
+    mkdir /tmp/git-heimdall-tool-test
+    cd /tmp/git-heimdall-tool-test
+    echo -n "print('<insert-some-sensitive-value>')" >> sample.py
+    git init
+    git add .
+    git commit -m "Sample commit"
+
+   This will start scanning the sample.py file and will provide you with the sensitive data that you have in this file. Add more files and play with the tool to familiar yourself.
 
 
 How to Use
