@@ -28,6 +28,7 @@ class TemplateManager:
             return
         for template in templates:
             file = template.get('file')
+            file = config.get_absolute_path(file)
             if path.exists(file):
                 extension = template.get('extension')
                 file = config.get_absolute_path(file)
