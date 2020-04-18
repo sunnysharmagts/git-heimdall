@@ -7,11 +7,12 @@ This module generates the template process which parses the template and
 secrets file and generates desired configuration file.
 """
 
-from heimdall.template import template
-from heimdall import config
-import shutil
 import os.path
+import shutil
 from os import path
+
+from heimdall import config
+from heimdall.template import template
 
 
 class TemplateManager:

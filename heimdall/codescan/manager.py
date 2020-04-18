@@ -6,11 +6,13 @@
 This module is for scanning the code via different plugins available to this module.
 """
 
-import os
 import fileinput
+import os
 import sys
-from heimdall.codescan.plugins import manager
+
 from heimdall import config
+from heimdall.codescan.plugins import manager
+
 
 class CodescanManager:
 

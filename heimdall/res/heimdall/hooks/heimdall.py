@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
-import sys
-import subprocess
+import os
 import re
+import subprocess
+import sys
+import threading
 #from termcolor import colored, cprint
 import time
-import threading
-import os
+
 
 def scan():
     _pwd = sys.argv[1]

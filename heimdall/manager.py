@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 
-from heimdall import util
-from heimdall.template import manager
-from heimdall.codescan import manager as codescan
 import sys
+
+from heimdall import util
+from heimdall.codescan import manager as codescan
+from heimdall.template import manager
+
 
 def main():
     """Runs the tool to parse the config. """

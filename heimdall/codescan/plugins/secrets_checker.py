@@ -4,14 +4,15 @@
 # scan via trufflehog
 # get scanned data and return it.
 
-import tempfile
-import subprocess
-import os
-import shutil
 import io
-from contextlib import redirect_stdout
-import sys
+import os
 import re
+import shutil
+import subprocess
+import sys
+import tempfile
+from contextlib import redirect_stdout
+
 
 class SecretsChecker:
 

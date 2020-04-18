@@ -1,6 +1,7 @@
 """Setup script."""
 
 import setuptools
+
 import heimdall
 
 _requires = open('requirements-dev.txt').read().splitlines()
