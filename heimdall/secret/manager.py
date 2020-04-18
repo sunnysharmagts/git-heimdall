@@ -10,7 +10,7 @@ dict format
 """
 
 
-from secretfy_template.secret import secret
+from heimdall.secret import secret
 
 
 class SecretsManager:

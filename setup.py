@@ -1,11 +1,11 @@
 """Setup script."""
 
 import setuptools
-import secretfy_template
+import heimdall
 
 _requires = open('requirements-dev.txt').read().splitlines()
 _long_description = open('README.rst').read()
-_version = secretfy_template.__version__
+_version = heimdall.__version__
 
 setuptools.setup(name='git-heimdall',
                  version=_version,
@@ -19,7 +19,7 @@ setuptools.setup(name='git-heimdall',
 
                  entry_points={
                      'console_scripts': {
-                         'heimdall=secretfy_template.manager:main'
+                         'heimdall=heimdall.manager:main'
                      }
                  },
                  include_package_data=True,

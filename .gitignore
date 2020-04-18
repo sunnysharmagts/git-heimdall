@@ -19,9 +19,9 @@ dist/
 *.egg-info
 
 #Ignore generated config file in /res
-secretfy_template/res/example.*
+heimdall/res/example.*
 
 #Ignore .html files
 *.html
 
-secretfy_template/test/test_repo_path.py
+heimdall/test/test_repo_path.py

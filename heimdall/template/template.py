@@ -12,7 +12,7 @@ import os
 import os.path
 import jinja2
 import git
-from secretfy_template.secret import manager
+from heimdall.secret import manager
 
 _log = logging.getLogger(__name__)
 
@@ -95,7 +95,7 @@ class Template:
                             f for f in filenames if f.endswith(config)]:
                         file_name = os.path.join(dirpath, filename)
                         line = open(file_name, 'r').readline()
-                        if line == 'secretfy_template':
+                        if line == 'heimdall':
                             break
                 self.exclude_from_git(file_name)
 

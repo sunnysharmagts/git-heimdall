@@ -7,6 +7,6 @@ deps: FORCE
 
 lint:
 	#. ./venv && isort --quiet --diff --skip-glob "*/build/*"
-	. ./vheimdall/bin/activate && pylama secretfy_template
+	. ./vheimdall/bin/activate && pylama heimdall
 
 FORCE:

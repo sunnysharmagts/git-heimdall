@@ -6,7 +6,7 @@
 This module is for scanning the code via different plugins available to this module.
 """
 
-from secretfy_template.codescan.plugins import secrets_checker
+from heimdall.codescan.plugins import secrets_checker
 
 class CodescanPluginManager:
 

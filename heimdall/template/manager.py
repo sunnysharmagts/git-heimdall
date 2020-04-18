@@ -7,8 +7,8 @@ This module generates the template process which parses the template and
 secrets file and generates desired configuration file.
 """
 
-from secretfy_template.template import template
-from secretfy_template import config
+from heimdall.template import template
+from heimdall import config
 import shutil
 import os.path
 from os import path

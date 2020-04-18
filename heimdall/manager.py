@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-from secretfy_template import util
-from secretfy_template.template import manager
-from secretfy_template.codescan import manager as codescan
+from heimdall import util
+from heimdall.template import manager
+from heimdall.codescan import manager as codescan
 import sys
 
 def main():
