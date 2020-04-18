@@ -18,9 +18,6 @@ dist/
 *.pyc
 *.egg-info
 
-#Ignore generated config file in /res
-heimdall/res/example.*
-
 #Ignore .html files
 *.html
 
