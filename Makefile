@@ -6,7 +6,7 @@ deps: FORCE
 	. ./vheimdall && pip3 install -r requirements-dev.txt
 
 lint:
-	#. ./venv && isort --quiet --diff --skip-glob "*/build/*"
-	. ./vheimdall/bin/activate && pylama heimdall
+	. ./vheimdall && isort --quiet --diff --skip-glob "*/build/*"
+	. ./vheimdall && pylama heimdall
 
 FORCE:
