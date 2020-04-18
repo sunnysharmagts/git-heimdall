@@ -1,4 +1,4 @@
-secretfy_template:
+heimdall:
     secret: res/secrets.yaml
     templates:
         -

@@ -4,8 +4,8 @@ import logging
 import os
 import yaml
 import argparse
-from secretfy_template import config
-import secretfy_template
+from heimdall import config
+import heimdall
 import ntpath
 
 _log = logging.getLogger(__name__)
@@ -25,7 +25,7 @@ def parse_cli(args=None):
     parser = argparse.ArgumentParser(prog='heimdall')
 
     parser.add_argument('-v', '--version', action='version',
-    version='%(prog)s' + secretfy_template.__version__)
+    version='%(prog)s' + heimdall.__version__)
 
     parser.add_argument(
         '-scan',
@@ -108,7 +108,7 @@ def load_config(config_paths):
         _log.info('Found %s', config_path)
         with open(config_path) as f:
             new_config = yaml.safe_load(f)
-            new_config = new_config['secretfy_template']
+            new_config = new_config['heimdall']
     if not isinstance(new_config, list):
         new_config = [new_config]
     return new_config

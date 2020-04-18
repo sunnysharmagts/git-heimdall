@@ -9,8 +9,8 @@ This module is for scanning the code via different plugins available to this mod
 import os
 import fileinput
 import sys
-from secretfy_template.codescan.plugins import manager
-from secretfy_template import config
+from heimdall.codescan.plugins import manager
+from heimdall import config
 
 class CodescanManager:
 

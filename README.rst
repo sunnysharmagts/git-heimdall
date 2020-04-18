@@ -6,7 +6,7 @@ committing files to github. It also provides functionality for creating
 configuration files from existing template files.
 
 .. image:: https://img.shields.io/badge/source-blue.svg?
-   :target: https://github.com/sunnysharmagts/git-heimdall/tree/master/secretfy_template
+   :target: https://github.com/sunnysharmagts/git-heimdall/tree/master/heimdall
 
 .. image:: https://img.shields.io/badge/license-MIT-blue.svg?
    :target: https://github.com/sunnysharmagts/git-heimdall/blob/master/LICENSE.md
@@ -156,7 +156,7 @@ some brief instructions on how they can be installed.
 
    .. code-block:: sh
 
-    python3 -m secretfy_template -i
+    python3 -m heimdall -i
 
    This initializes git-heimdall tool. This is just a **one time process** and
    need not be run everytime, unless if there is any change in the template
@@ -165,7 +165,7 @@ some brief instructions on how they can be installed.
 
    .. code-block:: sh
 
-    python3 -m secretfy_template secretfy -m
+    python3 -m heimdall secretfy -m
 
    This generates mock data at ``/tmp/git-heimdall``. This step serves as a
    sanity check that ensures that the development environment is correctly set
@@ -214,7 +214,7 @@ These parameters can be added to a ``baseconfig.yaml`` file in the following way
 
 .. code-block:: sh
 
-  secretfy_template:
+  heimdall:
       secret: res/secrets.yaml
       templates:
           -
@@ -228,7 +228,7 @@ These parameters can be added to a ``baseconfig.yaml`` file in the following way
             extension: xml
 
 
-The ``baseconfig.yaml`` file starts with ``secretfy_template`` tag.
+The ``baseconfig.yaml`` file starts with ``heimdall`` tag.
 
 1. ``secret`` is the absolute path of the secrets file containing sensitive
 values.

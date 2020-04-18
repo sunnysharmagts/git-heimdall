@@ -1,7 +1,7 @@
 #!usr/bin/env python
 
 
-"""Config util for secretfy_template.
+"""Config util for heimdall.
 
 This class is mainly for config utils like getting the absolute path of the
 installed directory.
