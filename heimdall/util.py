@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 
+import argparse
 import logging
 import os
+
 import yaml
-import argparse
-from heimdall import config
+
 import heimdall
-import ntpath
+from heimdall import config
 
 _log = logging.getLogger(__name__)
 
@@ -25,7 +26,7 @@ def parse_cli(args=None):
     parser = argparse.ArgumentParser(prog='heimdall')
 
     parser.add_argument('-v', '--version', action='version',
-    version='%(prog)s' + heimdall.__version__)
+                        version='%(prog)s' + heimdall.__version__)
 
     parser.add_argument(
         '-scan',
@@ -40,12 +41,14 @@ def parse_cli(args=None):
         help='Initialize Heimdall tool')
 
     _heimdall_sub_parser = parser.add_subparsers()
-    _secretfy_parser = _heimdall_sub_parser.add_parser('secretfy', help='secretfy command')
+    _secretfy_parser = _heimdall_sub_parser.add_parser('secretfy',
+                                                       help='secretfy command')
 
     add_secretfy_arguments(_secretfy_parser)
 
     args = parser.parse_args(args)
     return args
+
 
 def add_secretfy_arguments(parser):
 
