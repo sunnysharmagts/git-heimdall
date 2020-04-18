@@ -10,8 +10,10 @@ secret file and generates the final configuration file.
 import logging
 import os
 import os.path
-import jinja2
+
 import git
+import jinja2
+
 from heimdall.secret import manager
 
 _log = logging.getLogger(__name__)

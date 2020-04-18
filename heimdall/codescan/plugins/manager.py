@@ -8,6 +8,7 @@ This module is for scanning the code via different plugins available to this mod
 
 from heimdall.codescan.plugins import secrets_checker
 
+
 class CodescanPluginManager:
 
     def __init__(self):
