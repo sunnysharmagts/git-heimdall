@@ -35,6 +35,9 @@ def main():
         return None
     config_list = util.load_config(args.config)
     for config in config_list:
+        if not config:
+            print('Cannot find the config file. Please provide correct path of the config.')
+            continue
         template_manager.generate(**config)
         if not args.mock:
             template_manager.ignore_secretfy_config_file(args.config)

@@ -23,12 +23,16 @@ class TemplateManager:
         templates = kwargs.get('templates')
         secret = kwargs.get('secret')
         secret = config.get_absolute_path(secret)
+        if secret is None or not path.exists(secret):
+            print('Please provide the correct secrets file')
+            return
         for template in templates:
             file = template.get('file')
-            extension = template.get('extension')
-            file = config.get_absolute_path(file)
-            config_file = self._template.generate(secret, file, extension)
-            self._template.exclude_from_git(config_file)
+            if path.exists(file):
+                extension = template.get('extension')
+                file = config.get_absolute_path(file)
+                config_file = self._template.generate(secret, file, extension)
+                self._template.exclude_from_git(config_file)
 
     def ignore_secretfy_config_file(self, config_file):
         self._template.ignore_secretfy_config_file(config_file)
@@ -69,9 +73,10 @@ class TemplateManager:
         my_dict = dict()
         my_dict['secret'] = secret[0]
         templates = []
-        if repo is not None:
+        repo = repo[0]
+        if repo is not None and path.exists(repo):
             for dirpath, dirnames, filenames in \
-                    os.walk(repo[0]):
+                    os.walk(repo):
                 for filename in [
                         f for f in filenames if f.endswith(extension[0])]:
                     file_name = os.path.join(dirpath, filename)
@@ -83,3 +88,5 @@ class TemplateManager:
             my_dict['templates'] = templates
             self.generate(**my_dict)
             return my_dict
+        else:
+            print('Please provide the correct repo path')
