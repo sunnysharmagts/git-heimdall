@@ -27,11 +27,11 @@ class TemplateManager:
         if secret is None or not path.exists(secret):
             print('Please provide the correct secrets file')
             return
-        for template in templates:
-            file = template.get('file')
+        for temp in templates:
+            file = temp.get('file')
             file = config.get_absolute_path(file)
             if path.exists(file):
-                extension = template.get('extension')
+                extension = temp.get('extension')
                 file = config.get_absolute_path(file)
                 config_file = self._template.generate(secret, file, extension)
                 self._template.exclude_from_git(config_file)
