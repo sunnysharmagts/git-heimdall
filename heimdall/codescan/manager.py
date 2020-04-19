@@ -3,7 +3,8 @@
 
 """Manager of codescan process.
 
-This module is for scanning the code via different plugins available to this module.
+This module is for scanning the code via different plugins available to this
+module.
 """
 
 import fileinput
@@ -22,7 +23,8 @@ class CodescanManager:
     def init(self):
         _config_path = config.get_config_path()
         _path = os.path.expanduser('~/.gitconfig')
-        _hook_template_config_path = '\ttemplatedir = %s' % os.path.join(_config_path, 'res/heimdall')
+        _hook_template_config_path = '\ttemplatedir = %s' % \
+            os.path.join(_config_path, 'res/heimdall')
 
         val = False
         for line in fileinput.input(_path, inplace=True):
@@ -32,7 +34,8 @@ class CodescanManager:
             sys.stdout.write(line)
         if val:
             return
-        _hook_template_config_path = '\n[init]\n %s' % _hook_template_config_path
+        _hook_template_config_path = '\n[init]\n %s' % \
+            _hook_template_config_path
         _git_config_file_append_mode = open(_path, 'a+')
         _git_config_file_append_mode.write(_hook_template_config_path)
         _git_config_file_append_mode.close()

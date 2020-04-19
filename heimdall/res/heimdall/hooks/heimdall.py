@@ -3,7 +3,6 @@
 import os
 import subprocess
 import sys
-import time
 
 
 def scan():
@@ -38,8 +37,8 @@ def scan():
             _exit_code = 1
             revert_commit(_pwd)
     else:
-        print('\x1b[92mCongratulations~!!!. There is no sensitive data in your \
-               files.\x1b[0m\n')
+        print('\x1b[92mCongratulations~!!!. There is no sensitive data in \
+               your files.\x1b[0m\n')
     sys.exit(_exit_code)
 
 
@@ -65,6 +64,7 @@ def printDescription(root, file_name_list):
         print('[INFO] ', '.' * 20, os.path.join(root, file))
     print('\n')
     print('[INFO] This will take few seconds...')
+
 
 if __name__ == "__main__":
     scan()
