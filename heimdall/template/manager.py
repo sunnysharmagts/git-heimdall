@@ -54,6 +54,7 @@ class TemplateManager:
         conf = config.get_absolute_path('baseconfig1.yaml')
         shutil.copyfile(baseconfig, dir+'/baseconfig.yaml')
         shutil.copyfile(conf, dir+'/baseconfig1.yaml')
+        print('Check out the mock files at', dir, '~!!!')
 
     def move_files(self, root, format):
         dir = root + "/" + format
