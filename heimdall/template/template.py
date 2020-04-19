@@ -123,4 +123,8 @@ class Template:
 
         git_repo = git.Repo(file_path, search_parent_directories=True)
         git_root = git_repo.git.rev_parse("--show-toplevel")
+
+        # special case for /tmp since the path received is /private/tmp
+        if git_root.startswith('/private'):
+            git_root = git_root.replace('/private', '')
         return git_root
