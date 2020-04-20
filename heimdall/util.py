@@ -3,6 +3,7 @@
 import argparse
 import logging
 import os
+import sys
 
 import yaml
 
@@ -40,13 +41,19 @@ def parse_cli(args=None):
         action='store_true',
         help='Initialize Heimdall tool')
 
+    parser.add_argument(
+        '-a',
+        '--add',
+        nargs='*',
+        help='Register repository for heimdall scan')
+
     _heimdall_sub_parser = parser.add_subparsers()
+
     _secretfy_parser = _heimdall_sub_parser.add_parser('secretfy',
                                                        help='secretfy command')
-
     add_secretfy_arguments(_secretfy_parser)
-
     args = parser.parse_args(args)
+
     return args
 
 
