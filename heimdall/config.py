@@ -12,6 +12,8 @@ This is mainly for getting to support --mock implementation too
 import os
 import os.path as path
 
+import git
+
 _absolute_path = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -40,3 +42,15 @@ def get_absolute_path(file_path):
         if path.exists(mock_path):
             return mock_path
     return None
+
+
+def get_git_repo_path(file_path):
+    """ Get git repo root dir path. """
+
+    git_repo = git.Repo(file_path, search_parent_directories=True)
+    git_root = git_repo.git.rev_parse("--show-toplevel")
+
+    # special case for /tmp since the path received is /private/tmp
+    if git_root.startswith('/private'):
+        git_root = git_root.replace('/private', '')
+    return git_root
