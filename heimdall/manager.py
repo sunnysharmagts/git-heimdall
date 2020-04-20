@@ -16,27 +16,37 @@ def main():
     args = util.parse_cli()
     if args.init:
         _codescan_manager.init()
-        return
-    if args.codescan is not None:
+
+    elif args.codescan is not None:
         _codescan_manager.scan(sys.argv[2:])
+
+    elif args.add is not None:
+        _codescan_manager.add(sys.argv[2:])
+
+    elif check_all_template_args(args, _template_manager):
         return
 
-    if check_all_template_args(args, _template_manager):
-        return
-    config_list = util.load_config(args.config)
-    for config in config_list:
-        if not config:
-            print('Cannot find the config file. Please provide correct \
-                   path of the config.')
-            continue
-        _template_manager.generate(**config)
-        if not args.mock:
-            _template_manager.ignore_secretfy_config_file(args.config)
-    if args.mock:
-        _template_manager.move_mock_files()
+    else:
+        config_list = util.load_config(args.config)
+        for config in config_list:
+            if not config:
+                print('Cannot find the config file. Please provide correct \
+                       path of the config.')
+                continue
+            _template_manager.generate(**config)
+            if not args.mock:
+                _template_manager.ignore_secretfy_config_file(args.config)
+        if args.mock:
+            _template_manager.move_mock_files()
 
 
 def check_all_template_args(args, template_manager):
+    if not hasattr(args, 'extension') and \
+       not hasattr(args, 'repo') and \
+       not hasattr(args, 'secret'):
+           print('Please provide proper arguments.')
+           return True
+
     if args.extension is not None or \
        args.repo is not None or \
        args.secret is not None:
