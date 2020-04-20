@@ -11,9 +11,9 @@ import logging
 import os
 import os.path
 
-import git
 import jinja2
 
+from heimdall import config
 from heimdall.secret import manager
 
 _log = logging.getLogger(__name__)
@@ -64,7 +64,7 @@ class Template:
             file.
         """
         try:
-            self._git_root_dir = self._get_git_repo_path(config_file)
+            self._git_root_dir = config.get_git_repo_path(config_file)
         except git.exc.InvalidGitRepositoryError:
             return
         config_file = config_file.replace(self._git_root_dir, "")
@@ -117,14 +117,3 @@ class Template:
                 return True
         git_ignore_file.close()
         return False
-
-    def _get_git_repo_path(self, file_path):
-        """ Get git repo root dir path. """
-
-        git_repo = git.Repo(file_path, search_parent_directories=True)
-        git_root = git_repo.git.rev_parse("--show-toplevel")
-
-        # special case for /tmp since the path received is /private/tmp
-        if git_root.startswith('/private'):
-            git_root = git_root.replace('/private', '')
-        return git_root
