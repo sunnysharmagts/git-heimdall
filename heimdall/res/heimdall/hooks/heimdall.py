@@ -22,14 +22,12 @@ def scan():
     if len(_final_output) > 0:
         _exit_code = 1
         # Ask user whether he wants to still resume with the commit
-        color_print('\x1b[91m', 'Your files has some sensitive \
-                    data.', '\x1b[0m\n')
+        color_print('\x1b[91m', 'Your files has some sensitive data.', '\x1b[0m\n')
         print(_final_output)
         _continue_with_commit = ''
         sys.stdin = open('/dev/tty')
         while len(_continue_with_commit) == 0:
-            _continue_with_commit = input('Do you want to continue with the \
-                                           commit ?(y/n): ')
+            _continue_with_commit = input('Do you want to continue with the commit ?(y/n): ')
         _continue_with_commit = _continue_with_commit.lower()
         if(_continue_with_commit == 'y' or _continue_with_commit == 'yes'):
             _exit_code = 0
@@ -37,8 +35,7 @@ def scan():
             _exit_code = 1
             revert_commit(_pwd)
     else:
-        print('\x1b[92mCongratulations~!!!. There is no sensitive data in \
-               your files.\x1b[0m\n')
+        print('\x1b[92mCongratulations~!!!. There is no sensitive data in your files.\x1b[0m\n')
     sys.exit(_exit_code)
 
 
