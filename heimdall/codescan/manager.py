@@ -64,7 +64,8 @@ class CodescanManager:
                     _res_hook_files = os.listdir(_res_dir)
                     for file in _res_hook_files:
                         _file_name = path.join(_res_dir, file)
-                        _dest_file = path.join(_repo_git_hook_path, file)
-                        shutil.copyfile(_file_name, _dest_file)
-                        _relative_dest_file = path.join('.git/hooks', file)
-                        p = subprocess.run(["chmod", "a+x", _relative_dest_file], cwd=_repo_root_path, capture_output=False, shell=False)
+                        if path.isfile(_file_name):
+                            _dest_file = path.join(_repo_git_hook_path, file)
+                            shutil.copyfile(_file_name, _dest_file)
+                            _relative_dest_file = path.join('.git/hooks', file)
+                            p = subprocess.run(["chmod", "a+x", _relative_dest_file], cwd=_repo_root_path, capture_output=False, shell=False)
