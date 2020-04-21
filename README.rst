@@ -68,6 +68,16 @@ This section provides quick steps of how to setup this tool.
    ``/tmp/git-heimdall`` directory. The ``-c`` or ``--config``
    option is for providing your config.yaml file.
 
+3. Register current project with git-heimdall
+
+   .. code-block:: sh
+
+    heimdall -a <absolute-path-of-project>
+
+   The above command registers your project with heimdall scans. Next time when
+   you try to commit staged files, it would start scanning those files before
+   it gets added to commit and pushed to github.
+
 
 More about Git-Heimdall secretfy
 --------------------------------
