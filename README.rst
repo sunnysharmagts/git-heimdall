@@ -192,6 +192,21 @@ How to Use
 
 This section provides samples of how to use this tool.
 
+``heimdall`` is initialized once after installation. That can be done for the following :-
+
+.. code-block:: sh
+
+  heimdall -i
+
+After initialization, any new repository created or cloned will be scanned by
+heimdall once any staged files are committed.
+
+You can register existing repositories to heimdall to integrate scanning process.
+
+.. code-block:: sh
+
+  heimdall -a <absolute-path-of-repo>
+
 ``heimdall secretfy`` consist of 3 components :-
 
 **Secrets file** - This file can be in yaml, json and xml format.
