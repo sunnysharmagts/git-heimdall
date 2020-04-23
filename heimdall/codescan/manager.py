@@ -53,7 +53,7 @@ class CodescanManager:
                 _files.append(os.path.join(_repo_abs_dir_path, file))
             self.plugin_manager.scan(_files)
 
-    def add(self, argv):
+    def register(self, argv):
         if argv:
             for repo_path in argv:
                 if path.exists(repo_path):

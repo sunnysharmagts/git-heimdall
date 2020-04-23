@@ -20,8 +20,8 @@ def main():
     elif args.codescan is not None:
         _codescan_manager.scan(sys.argv[2:])
 
-    elif args.add is not None:
-        _codescan_manager.add(sys.argv[2:])
+    elif args.register is not None:
+        _codescan_manager.register(sys.argv[2:])
 
     elif check_all_template_args(args, _template_manager):
         return

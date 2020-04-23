@@ -42,8 +42,8 @@ def parse_cli(args=None):
         help='Initialize Heimdall tool')
 
     parser.add_argument(
-        '-a',
-        '--add',
+        '-reg',
+        '--register',
         nargs='*',
         help='Register repository for heimdall scan')
 
