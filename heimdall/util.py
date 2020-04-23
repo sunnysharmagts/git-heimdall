@@ -47,6 +47,12 @@ def parse_cli(args=None):
         nargs='*',
         help='Register repository for heimdall scan')
 
+    parser.add_argument(
+        '-un-reg',
+        '--un-register',
+        nargs='*',
+        help='Un-register repository from heimdall scan')
+
     _heimdall_sub_parser = parser.add_subparsers()
 
     _secretfy_parser = _heimdall_sub_parser.add_parser('secretfy',

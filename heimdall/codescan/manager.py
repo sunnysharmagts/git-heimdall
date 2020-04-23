@@ -69,3 +69,21 @@ class CodescanManager:
                             shutil.copyfile(_file_name, _dest_file)
                             _relative_dest_file = path.join('.git/hooks', file)
                             p = subprocess.run(["chmod", "a+x", _relative_dest_file], cwd=_repo_root_path, capture_output=False, shell=False)
+
+
+    def unregister(self, argv):
+        if argv:
+            for repo_path in argv:
+                if path.exists(repo_path):
+                    _repo_root_path = config.get_git_repo_path(repo_path)
+                    _current_dir = config.get_config_path()
+                    _res_dir = path.join(_current_dir,'res/heimdall/hooks')
+                    _res_hook_files = os.listdir(_res_dir)
+                    for file in _res_hook_files:
+                        _file_name = path.join(_res_dir, file)
+                        if path.isfile(_file_name):
+                            _relative_dest_file = path.join('.git/hooks', file)
+                            #print(_relative_dest_file)
+                            _abs_path = path.join(_repo_root_path, _relative_dest_file)
+                            if path.exists(_abs_path):
+                                p = subprocess.run(["rm", _relative_dest_file], cwd=_repo_root_path, capture_output=False, shell=False)

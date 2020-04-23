@@ -23,6 +23,9 @@ def main():
     elif args.register is not None:
         _codescan_manager.register(sys.argv[2:])
 
+    elif args.un_register is not None:
+        _codescan_manager.unregister(sys.argv[2:])
+
     elif check_all_template_args(args, _template_manager):
         return
 
