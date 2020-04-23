@@ -215,7 +215,7 @@ You can register existing repositories to heimdall to integrate scanning process
 
 .. code-block:: sh
 
-  heimdall -a <absolute-path-of-repo>
+  heimdall -reg <absolute-path-of-repo>
 
 ``heimdall secretfy`` consist of 3 components :-
 
