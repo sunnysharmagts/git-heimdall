@@ -68,7 +68,7 @@ class CodescanManager:
                         _final_result.write('\x1b[91mFile name : '+item_map['file'] + '\x1b[0m\n')
                         _final_result.write('\x1b[93mFound : '+item+'\x1b[0m\n')
                         _final_result.write('\n\n')
-        return _final_result.getvalue()
+        return _final_result.getvalue().strip()
 
 
     def register(self, argv):
