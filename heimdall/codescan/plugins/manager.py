@@ -27,10 +27,10 @@ class CodescanPluginManager:
             _full_file_name = os.path.join(repo_path, file_name)
             file = open(_full_file_name, "r")
             text = file.read()
-            _final_map = dict()
             for plugin in self.plugins:
                 _result_map = plugin.scan(text)
                 if _result_map is not None and len(_result_map) > 0:
+                    _final_map = dict()
                     _final_map['reason'] = _result_map
                     _final_map['file'] = file_name
                     result.append(_final_map)
