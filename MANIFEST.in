@@ -3,4 +3,5 @@ recursive-include heimdall/res *.mustache
 recursive-include heimdall/res/heimdall *
 include heimdall/baseconfig1.yaml
 include heimdall/baseconfig.yaml
+include heimdall/res/regex.json
 include requirements-dev.txt

@@ -18,7 +18,7 @@ def main():
         _codescan_manager.init()
 
     elif args.codescan is not None:
-        _codescan_manager.scan(sys.argv[2:])
+        print(_codescan_manager.scan(sys.argv[2:]))
 
     elif args.register is not None:
         _codescan_manager.register(sys.argv[2:])

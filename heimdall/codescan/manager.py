@@ -14,6 +14,7 @@ import os.path as path
 import shutil
 import subprocess
 import sys
+from io import StringIO
 
 from heimdall import config
 from heimdall.codescan.plugins import manager
@@ -49,9 +50,29 @@ class CodescanManager:
             _repo_abs_dir_path = argv[0]
             _files = []
             _file_name_list = argv[1].split()
-            for file in _file_name_list:
-                _files.append(os.path.join(_repo_abs_dir_path, file))
-            self.plugin_manager.scan(_files)
+            _result_list = self.plugin_manager.scan(_repo_abs_dir_path, _file_name_list)
+            _result = self.format_data(_result_list)
+            return _result
+
+
+    def format_data(self, result_list):
+        _final_result = StringIO()
+        if result_list:
+            for item_map in result_list:
+                reason_dict = item_map['reason']
+                for reason_key in reason_dict:
+                    _val_list = reason_dict[reason_key]
+                    for item in _val_list:
+                        _val = 'Reason : ' + reason_key
+                        _final_result.write(_val)
+                        _final_result.write('\n')
+                        _final_result.write('File name : '+item_map['file'])
+                        _final_result.write('\n')
+                        _final_result.write('Found : '+item)
+                        _final_result.write('\n\n')
+                _final_result.write('\n\n')
+        return _final_result.getvalue()
+
 
     def register(self, argv):
         if argv:
