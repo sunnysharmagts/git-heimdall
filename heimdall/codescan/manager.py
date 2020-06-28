@@ -63,14 +63,11 @@ class CodescanManager:
                 for reason_key in reason_dict:
                     _val_list = reason_dict[reason_key]
                     for item in _val_list:
-                        _val = 'Reason : ' + reason_key
+                        _val = '\x1b[91mReason : ' + reason_key + '\x1b[0m\n'
                         _final_result.write(_val)
-                        _final_result.write('\n')
-                        _final_result.write('File name : '+item_map['file'])
-                        _final_result.write('\n')
-                        _final_result.write('Found : '+item)
+                        _final_result.write('\x1b[91mFile name : '+item_map['file'] + '\x1b[0m\n')
+                        _final_result.write('\x1b[93mFound : '+item+'\x1b[0m\n')
                         _final_result.write('\n\n')
-                _final_result.write('\n\n')
         return _final_result.getvalue()
 
 
